@@ -1,0 +1,9 @@
+{
+  "env": {
+    "production": {
+      "plugins": ["@emotion"]
+    }
+  },
+  "presets": ["next/babel"],
+  "plugins": ["@emotion"]
+}
