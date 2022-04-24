@@ -1,7 +1,7 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": ["source.organizeImports", "source.fixAll.eslint"],
+  "editor.codeActionsOnSave": ["source.fixAll.eslint"],
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": false,
   "typescript.tsdk": "./node_modules/typescript/lib",
