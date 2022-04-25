@@ -1,16 +1,14 @@
-import { Theme } from '@emotion/react';
-
 import { light, dark } from './color';
 import { spacing } from './spacing';
 
-const lightTheme: Theme = {
+const lightTheme = {
   colors: { ...light },
   spacing
-};
+} as const;
 
-const darkTheme: Theme = {
+const darkTheme = {
   colors: { ...dark },
   spacing
-};
+} as const;
 
 export { lightTheme, darkTheme };
