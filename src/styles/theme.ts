@@ -1,21 +1,16 @@
 import { Theme } from '@emotion/react';
 
-const colors = {
-  brand: '#FF4600',
-  black: '#292929',
-  grey: '#9E9E9E',
-  lightGrey: '#FAFAFA',
-  white: '#fff'
+import { light, dark } from './color';
+import { spacing } from './spacing';
+
+const lightTheme: Theme = {
+  colors: { ...light },
+  spacing
 };
 
-const tone = {
-  light: '#fff',
-  dark: '#232323'
+const darkTheme: Theme = {
+  colors: { ...dark },
+  spacing
 };
 
-const theme: Theme = {
-  colors,
-  tone
-};
-
-export default theme;
+export { lightTheme, darkTheme };
