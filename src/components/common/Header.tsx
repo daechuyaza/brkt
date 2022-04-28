@@ -31,9 +31,7 @@ const UpperWrapper = styled.div`
   border-bottom: 1px solid black;
 `;
 
-const LogoBox = styled.div`
-  background-color: black;
-`;
+const LogoBox = styled.div``;
 
 const UpperLeftNavigatorBox = styled.div`
   display: flex;
