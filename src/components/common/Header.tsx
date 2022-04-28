@@ -2,12 +2,16 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
+import { Logo } from 'common/assets/icons/Logo';
+
 export default function Header() {
   return (
     <Container>
       <UpperWrapper>
         <LogoBox />
-        <UpperLeftNavigatorBox />
+        <UpperLeftNavigatorBox>
+          <Logo />
+        </UpperLeftNavigatorBox>
       </UpperWrapper>
       <LowerWrapper />
     </Container>
@@ -32,9 +36,12 @@ const LogoBox = styled.div`
 `;
 
 const UpperLeftNavigatorBox = styled.div`
-  width: 15%;
+  display: flex;
+  justify-content: 'center';
+  align-items: 'center';
+  width: 8%;
+  padding: 0.4rem;
   height: '100%';
-  background-color: black;
 `;
 
 const LowerWrapper = styled.div`
