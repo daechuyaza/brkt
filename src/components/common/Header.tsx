@@ -26,7 +26,6 @@ const Container = styled.div`
 
 const UpperWrapper = styled.div`
   display: flex;
-
   flex: 2 1 0;
   border-bottom: 1px solid black;
 `;
