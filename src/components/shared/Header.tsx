@@ -8,10 +8,10 @@ export default function Header() {
   return (
     <Container>
       <UpperWrapper>
-        <LogoBox />
-        <UpperLeftNavigatorBox>
+        <LogoBox>
           <Logo />
-        </UpperLeftNavigatorBox>
+        </LogoBox>
+        <UpperLeftNavigatorBox></UpperLeftNavigatorBox>
       </UpperWrapper>
       <LowerWrapper />
     </Container>
@@ -30,7 +30,17 @@ const UpperWrapper = styled.div`
   border-bottom: 1px solid black;
 `;
 
-const LogoBox = styled.div``;
+const LogoBox = styled.div`
+  display: flex;
+  justify-content: 'center';
+  align-items: 'center';
+  width: 11.6rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+  padding-left: 2.4rem;
+  height: '100%';
+  background-color: ${(props) => props.theme.colors.error};
+`;
 
 const UpperLeftNavigatorBox = styled.div`
   display: flex;
