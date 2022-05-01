@@ -33,9 +33,12 @@ const Container = styled.div`
   display: flex;
   flex: 2 1 0;
   justify-content: space-between;
-  border-bottom: 1px solid black;
+  border-bottom-width: 1px;
+  border-bottom-color: ${(props) => props.theme.colors.onSurface};
+  border-bottom-style: solid;
   padding-right: ${(props) => props.theme.spacing[5]};
   padding-left: ${(props) => props.theme.spacing[5]};
+  color: ${(props) => props.theme.colors.onSurface};
 `;
 
 const LeftWrapper = styled.div`
