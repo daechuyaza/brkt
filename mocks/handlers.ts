@@ -1,13 +1,20 @@
 import { rest } from 'msw';
 
 export const handlers = [
-  rest.get('https://my.backend/book', (req, res, ctx) =>
+  rest.get('https://backend/articles', (req, res, ctx) =>
     res(
-      ctx.json({
-        title: 'Lord of the Rings',
-        description:
-          'The Lord of the Rings is an epic high-fantasy novel written by English author and scholar J. R. R. Tolkien.'
-      })
+      ctx.json([
+        {
+          title: 'CircuitBreaker를 이용한 외부 API 장애 관리',
+          thumbNail: 'https://picsum.photos/200',
+          updatedAt: new Date()
+        },
+        {
+          title: '깔끔하게 깃 관리하기 Rebase와 Merge',
+          thumbNail: 'https://picsum.photos/200',
+          updatedAt: new Date()
+        }
+      ])
     )
   ),
   rest.get('/reviews', (req, res, ctx) =>

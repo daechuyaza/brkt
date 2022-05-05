@@ -1,29 +1,28 @@
 import type { NextPage } from 'next';
 
+import { Header } from '@common/ui/Header/Header';
 import { Main } from '@components/main/Main';
-import Header from 'common/ui/Header/Header';
+import { ArticleType } from '@modules/article/types/article';
 
-const Home: NextPage = ({ book }: any) => {
-  console.log('book', book);
+type Props = ArticleType[];
 
-  return (
-    <>
-      <Header />
-      <Main />
-    </>
-  );
-};
+const Home: NextPage<Props> = (articles) => (
+  <>
+    <Header />
+    <Main articles={articles} />
+  </>
+);
 
 export default Home;
 
 export async function getServerSideProps() {
   // Server-side requests are mocked by `mocks/server.js`.
-  const res = await fetch('https://my.backend/book');
-  const book = (await res.json()) as unknown;
+  const res = await fetch('https://backend/articles');
+  const articles = (await res.json()) as ArticleType[];
 
   return {
     props: {
-      book
+      articles
     }
   };
 }

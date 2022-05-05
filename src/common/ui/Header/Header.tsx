@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import { Marquee } from './Marquee/Marquee';
 import { Navigator } from './Navigator/Navigator';
 
-export default function Header() {
+export function Header() {
   return (
     <Container>
       <Navigator />

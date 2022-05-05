@@ -2,7 +2,15 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
-export function Main() {
+import { ArticleType } from '@modules/article/types/article';
+
+type MainProps = {
+  articles: ArticleType[];
+};
+
+export function Main({ articles }: MainProps) {
+  console.log('articles', articles);
+
   return <Container>Main</Container>;
 }
 
