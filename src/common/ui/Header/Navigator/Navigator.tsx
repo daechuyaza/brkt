@@ -43,6 +43,7 @@ const Container = styled.div`
 
 const LeftWrapper = styled.div`
   display: flex;
+  flex-shrink: 1;
 `;
 
 const RightWrapper = styled.div`
@@ -53,6 +54,7 @@ const RightWrapper = styled.div`
 const LogoBox = styled.div`
   display: flex;
   align-items: center;
+  flex-shrink: 1;
   width: 11.6rem;
   height: '100%';
   margin-right: ${(props) => props.theme.spacing[5]};
@@ -82,7 +84,6 @@ const ContactButton = styled.a`
 const SubButtonsBox = styled.div`
   display: flex;
   align-self: center;
-  min-width: 10rem;
   margin-right: ${(props) => props.theme.spacing[5]};
 `;
 

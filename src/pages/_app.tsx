@@ -5,6 +5,11 @@ import { RecoilRoot } from 'recoil';
 import { global } from '../styles/global';
 import { lightTheme } from '../styles/theme';
 
+if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
+  // eslint-disable-next-line global-require
+  require('../../mocks');
+}
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <RecoilRoot>
