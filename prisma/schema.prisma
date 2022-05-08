@@ -126,7 +126,6 @@ model Series {
   deletedAt   DateTime? @map(name: "deleted_at")
 
   Post Post[]
-  @@map(name: "Serieses")
 }
 
 model Subscription {
