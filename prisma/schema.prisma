@@ -19,7 +19,130 @@ model User {
   updatedAt    DateTime? @updatedAt @map(name: "updated_at")
   deletedAt    DateTime? @map(name: "deleted_at")
 
+  Post              Post[]
+  Series            Series[]
+  User              Follower[]          @relation("User")
+  FollowingUser     Follower[]          @relation("FollowingUser")
+  Link              Link[]
+  LikesOnPosts      LikesOnPosts[]
+  Comment           Comment[]
+  RepliesOnComments RepliesOnComments[]
   @@map(name: "Users")
+}
+
+model Follower {
+  id              Int       @id @default(autoincrement())
+  user            User      @relation("User", fields: [userId], references: [id])
+  userId          Int       @map(name: "user_id")
+  followingUser   User      @relation("FollowingUser", fields: [followingUserId], references: [id])
+  followingUserId Int       @map(name: "following_user_id")
+  createdAt       DateTime  @default(now()) @map(name: "created_at")
+  updatedAt       DateTime? @updatedAt @map(name: "updated_at")
+  deletedAt       DateTime? @map(name: "deleted_at")
+
+  @@map(name: "Followers")
+}
+
+model Link {
+  id        Int       @id @default(autoincrement())
+  user      User      @relation(fields: [userId], references: [id])
+  userId    Int       @map(name: "user_id")
+  type      LinkType
+  url       String    @db.VarChar
+  createdAt DateTime  @default(now()) @map(name: "created_at")
+  updatedAt DateTime? @updatedAt @map(name: "updated_at")
+  deletedAt DateTime? @map(name: "deleted_at")
+
+  @@map(name: "Links")
+}
+
+model Post {
+  id        Int       @id @default(autoincrement())
+  author    User      @relation(fields: [authorId], references: [id])
+  authorId  Int       @map(name: "author_id")
+  series    Series?   @relation(fields: [seriesId], references: [id])
+  seriesId  Int?      @map(name: "series_id")
+  title     String    @db.VarChar
+  content   String    @db.VarChar
+  thumbnail String    @db.VarChar
+  viewCount BigInt    @map(name: "view_count")
+  isPublic  Boolean   @default(false) @map(name: "is_public")
+  createdAt DateTime  @default(now()) @map(name: "created_at")
+  updatedAt DateTime? @updatedAt @map(name: "updated_at")
+  deletedAt DateTime? @map(name: "deleted_at")
+
+  LikesOnPosts LikesOnPosts[]
+  Comment      Comment[]
+  @@map(name: "Posts")
+}
+
+model LikesOnPosts {
+  id        Int       @id @default(autoincrement())
+  user      User      @relation(fields: [userId], references: [id])
+  userId    Int       @map(name: "user_id")
+  post      Post      @relation(fields: [postId], references: [id])
+  postId    Int       @map(name: "post_id")
+  createdAt DateTime  @default(now()) @map(name: "created_at")
+  updatedAt DateTime? @updatedAt @map(name: "updated_at")
+  deletedAt DateTime? @map(name: "deleted_at")
+}
+
+model Comment {
+  id        Int       @id @default(autoincrement())
+  user      User      @relation(fields: [userId], references: [id])
+  userId    Int       @map(name: "user_id")
+  post      Post      @relation(fields: [postId], references: [id])
+  postId    Int       @map(name: "post_id")
+  comment   String    @db.VarChar()
+  createdAt DateTime  @default(now()) @map(name: "created_at")
+  updatedAt DateTime? @updatedAt @map(name: "updated_at")
+  deletedAt DateTime? @map(name: "deleted_at")
+
+  RepliesOnComments RepliesOnComments[]
+  @@map(name: "Comments")
+}
+
+model RepliesOnComments {
+  id        Int       @id @default(autoincrement())
+  user      User      @relation(fields: [userId], references: [id])
+  userId    Int       @map(name: "user_id")
+  comment   Comment   @relation(fields: [commentId], references: [id])
+  commentId Int       @map(name: "comment_id")
+  reply     String    @db.VarChar
+  createdAt DateTime  @default(now()) @map(name: "created_at")
+  updatedAt DateTime? @updatedAt @map(name: "updated_at")
+  deletedAt DateTime? @map(name: "deleted_at")
+}
+
+model Series {
+  id          Int       @id @default(autoincrement())
+  author      User      @relation(fields: [authorId], references: [id])
+  authorId    Int       @map(name: "author_id")
+  title       String    @db.VarChar
+  description String    @db.VarChar
+  thumbnail   String    @db.VarChar
+  createdAt   DateTime  @default(now()) @map(name: "created_at")
+  updatedAt   DateTime? @updatedAt @map(name: "updated_at")
+  deletedAt   DateTime? @map(name: "deleted_at")
+
+  Post Post[]
+  @@map(name: "Serieses")
+}
+
+model Subscription {
+  id        Int       @id @default(autoincrement())
+  email     String
+  createdAt DateTime  @default(now()) @map(name: "created_at")
+  updatedAt DateTime? @updatedAt @map(name: "updated_at")
+  deletedAt DateTime? @map(name: "deleted_at")
+
+  @@map(name: "Subscriptions")
+}
+
+enum LinkType {
+  kakaotalk
+  twitter
+  facebook
 }
 
 enum Role {
