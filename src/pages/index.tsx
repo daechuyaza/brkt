@@ -51,7 +51,6 @@ const HeaderArea = styled.div`
 const MainArticlesArea = styled.div`
   grid-area: mainArticles;
   display: flex;
-  background-color: red;
 `;
 
 const ButtonList = styled.div`

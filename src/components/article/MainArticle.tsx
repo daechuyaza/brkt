@@ -9,6 +9,17 @@ type Props = {
   article: ArticleType;
 };
 
+/**
+ * NOTE
+ * next image의 responsive는 부모가 꼭 block element여야 합니다.
+ * responsive 모드일때 width와 height는 실제 크기가 아니라 비율입니다.
+ * responvie 모드일때 해당 이미지 컴포넌트의 크기는 부모의 width에 따라서 결정됩니다.
+ *
+ * 아래 컴포넌트의 경우 Container가 flex 1 1 0 (MainArticle 이 두개이므로 50%씩)
+ * ThumbnailWrapper가 block이므로 100%(부모는 50%이므로 절반)
+ * 따라서 절반 크기의 높이를 가지게 됩니다.
+ */
+
 export function MainArticle({ article }: Props) {
   return (
     <Container>
@@ -37,6 +48,7 @@ const Container = styled.div`
   display: flex;
   flex: 1 1 0;
   flex-direction: column;
+  background-color: brown;
 `;
 
 const ThumbnailWrapper = styled.div`
