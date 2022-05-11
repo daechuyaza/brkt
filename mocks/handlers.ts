@@ -11,13 +11,13 @@ export const handlers = [
         {
           title: 'CircuitBreaker를 이용한 외부 API 장애 관리',
           author: '티나리',
-          thumbNail: 'https://picsum.photos/600',
+          thumbNail: 'https://picsum.photos/1000',
           updatedAt: new Date().toISOString().substring(0, 10)
         },
         {
           title: '깔끔하게 깃 관리하기 Rebase와 Merge',
           author: '티나리',
-          thumbNail: 'https://picsum.photos/600',
+          thumbNail: 'https://picsum.photos/1000',
           updatedAt: new Date().toISOString().substring(0, 10)
         }
       ])

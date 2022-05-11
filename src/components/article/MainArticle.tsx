@@ -12,9 +12,16 @@ type Props = {
 export function MainArticle({ article }: Props) {
   return (
     <Container>
-      <Thumbnail>
-        <Image src={article.thumbNail} width={'100%'} height={'100%'} layout={'responsive'} />
-      </Thumbnail>
+      <ThumbnailWrapper>
+        <Image
+          src={article.thumbNail}
+          layout={'responsive'}
+          width={16}
+          height={10}
+          priority={true}
+          sizes={'50vw'}
+        />
+      </ThumbnailWrapper>
       <DescriptionWrapper>
         <Title>{article.title}</Title>
         <SubDescrptionBox>
@@ -32,22 +39,19 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const Thumbnail = styled.div`
-  position: relative;
-  background-color: brown;
-  object-fit: contain;
+const ThumbnailWrapper = styled.div`
+  display: block;
+  object-fit: cover;
 `;
 
 const DescriptionWrapper = styled.div`
   padding-right: ${(props) => props.theme.spacing[7]};
   padding-left: ${(props) => props.theme.spacing[7]};
-  width: 100%;
   background-color: green;
 `;
 
 const SubDescrptionBox = styled.div`
   display: flex;
-  flex: 1 1 0;
 `;
 
 const Title = styled.div`

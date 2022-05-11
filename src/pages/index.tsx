@@ -21,7 +21,7 @@ const Home: NextPage<Props> = ({ articles }) => {
         </HeaderArea>
         <MainArticlesArea>
           <MainArticle article={leftArticle} />
-          <MainArticle article={leftArticle} />
+          <MainArticle article={rightArticle} />
         </MainArticlesArea>
         <ButtonList>Button</ButtonList>
         <Footer>Fotter</Footer>
