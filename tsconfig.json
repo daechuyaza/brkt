@@ -1,9 +1,13 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "paths": {
-      "@components/*": ["components/*"],
-      "@utils/*": ["utils/*"],
-      "@pages/*": ["pages/*"]
+      "@common/*": ["./src/common/*"],
+      "@components/*": ["./src/components/*"],
+      "@modules/*": ["./src/modules/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@routers/*": ["./src/routers/*"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -17,13 +21,12 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "jsxImportSource": "@emotion/react",
-    "baseUrl": "src",
     "downlevelIteration": true,
     "allowSyntheticDefaultImports": true,
     "incremental": true
   },
-  "include": ["src/", "next-env.d.ts"],
+  "include": ["src/", "next-env.d.ts", "mocks/"],
   "exclude": ["node_modules"]
 }

@@ -37,7 +37,7 @@
     "import/prefer-default-export": 0,
     "import/no-extraneous-dependencies": [
       "error",
-      { "devDependencies": ["**/*.stories.js", "**/*.stories.ts", "**/*.stories.tsx"] }
+      { "devDependencies": ["mocks/*", "**/*.stories.js", "**/*.stories.ts", "**/*.stories.tsx"] }
     ],
     "jsx-a11y/click-events-have-key-events": 0,
     "jsx-a11y/mouse-events-have-key-events": 0,

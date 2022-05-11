@@ -13,6 +13,7 @@ export const global = css`
 
   html,
   body {
+    font-size: 62.5%;
     height: 100%;
     padding: 0;
     margin: 0;
