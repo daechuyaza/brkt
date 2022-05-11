@@ -2,9 +2,9 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
-import { DarkMode } from 'common/assets/icons/DarkMode';
-import { Logo } from 'common/assets/icons/Logo';
-import { Search } from 'common/assets/icons/Search';
+import { DarkMode } from '@common/assets/icons/DarkMode';
+import { Logo } from '@common/assets/icons/Logo';
+import { Search } from '@common/assets/icons/Search';
 
 export function Navigator() {
   return (

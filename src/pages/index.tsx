@@ -1,22 +1,70 @@
+import styled from '@emotion/styled';
 import type { NextPage } from 'next';
 
 import { Header } from '@common/ui/Header/Header';
-import { Main } from '@components/main/Main';
+import { MainArticle } from '@components/article/MainArticle';
 import { ArticleType } from '@modules/article/types/article';
 
-type Props = ArticleType[];
+type Props = {
+  articles: ArticleType[];
+};
 
-const Home: NextPage<Props> = (articles) => (
-  <>
-    <Header />
-    <Main articles={articles} />
-  </>
-);
+const Home: NextPage<Props> = ({ articles }) => {
+  const leftArticle = articles[0];
+  const rightArticle = articles[1];
+
+  return (
+    <>
+      <Container>
+        <HeaderArea>
+          <Header />
+        </HeaderArea>
+        <MainArticlesArea>
+          <MainArticle article={leftArticle} />
+          <MainArticle article={leftArticle} />
+        </MainArticlesArea>
+        <ButtonList>Button</ButtonList>
+        <Footer>Fotter</Footer>
+      </Container>
+    </>
+  );
+};
 
 export default Home;
 
-export async function getServerSideProps() {
-  // Server-side requests are mocked by `mocks/server.js`.
+const Container = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: minmax(11.4rem, auto);
+  grid-template-areas:
+    'header'
+    'mainArticles'
+    'buttonList'
+    'footer';
+  width: 100vw;
+`;
+
+const HeaderArea = styled.div`
+  grid-area: header;
+`;
+
+const MainArticlesArea = styled.div`
+  grid-area: mainArticles;
+  display: flex;
+  background-color: red;
+`;
+
+const ButtonList = styled.div`
+  grid-area: buttonList;
+  background-color: skyblue;
+`;
+
+const Footer = styled.div`
+  grid-area: footer;
+  background-color: purple;
+`;
+
+export async function getStaticProps() {
   const res = await fetch('https://backend/articles');
   const articles = (await res.json()) as ArticleType[];
 

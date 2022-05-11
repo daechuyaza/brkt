@@ -1,18 +1,24 @@
 import { rest } from 'msw';
 
+/**
+ * TODO updatedAt 바꾸기
+ */
+
 export const handlers = [
   rest.get('https://backend/articles', (req, res, ctx) =>
     res(
       ctx.json([
         {
           title: 'CircuitBreaker를 이용한 외부 API 장애 관리',
-          thumbNail: 'https://picsum.photos/200',
-          updatedAt: new Date()
+          author: '티나리',
+          thumbNail: 'https://picsum.photos/600',
+          updatedAt: new Date().toISOString().substring(0, 10)
         },
         {
           title: '깔끔하게 깃 관리하기 Rebase와 Merge',
-          thumbNail: 'https://picsum.photos/200',
-          updatedAt: new Date()
+          author: '티나리',
+          thumbNail: 'https://picsum.photos/600',
+          updatedAt: new Date().toISOString().substring(0, 10)
         }
       ])
     )

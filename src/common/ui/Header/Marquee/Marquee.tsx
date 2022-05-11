@@ -13,6 +13,7 @@ export function Marquee() {
 
 const Container = styled.div`
   display: flex;
+  max-width: 100vw;
   flex: 2 1 0;
   align-items: center;
   font-size: 2.4rem;
