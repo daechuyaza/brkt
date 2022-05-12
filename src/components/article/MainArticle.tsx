@@ -53,7 +53,7 @@ const Container = styled.div`
 
 const ThumbnailWrapper = styled.div`
   display: block;
-  object-fit: cover;
+  object-fit: contain;
 `;
 
 const DescriptionWrapper = styled.div`
