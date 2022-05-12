@@ -24,14 +24,7 @@ export function MainArticle({ article }: Props) {
   return (
     <Container>
       <ThumbnailWrapper>
-        <Image
-          src={article.thumbNail}
-          layout={'responsive'}
-          width={16}
-          height={10}
-          priority={true}
-          sizes={'50vw'}
-        />
+        <Thumbnail src={article.thumbNail} layout={'fill'} priority={true} />
       </ThumbnailWrapper>
       <DescriptionWrapper>
         <Title>{article.title}</Title>
@@ -52,8 +45,13 @@ const Container = styled.div`
 `;
 
 const ThumbnailWrapper = styled.div`
-  display: block;
-  object-fit: contain;
+  position: relative;
+  width: 100%;
+  height: 60vh;
+`;
+
+const Thumbnail = styled(Image)`
+  object-fit: cover;
 `;
 
 const DescriptionWrapper = styled.div`
@@ -71,12 +69,6 @@ const Title = styled.div`
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 700;
   color: ${(props) => props.theme.colors.onSurface};
-`;
-
-const AuthorThumbnail = styled.div`
-  position: relative;
-  background-color: brown;
-  object-fit: contain;
 `;
 
 const Author = styled.div`
