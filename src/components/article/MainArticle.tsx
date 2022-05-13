@@ -55,8 +55,14 @@ const Thumbnail = styled(Image)`
 `;
 
 const DescriptionWrapper = styled.div`
-  padding-right: ${(props) => props.theme.spacing[7]};
-  padding-left: ${(props) => props.theme.spacing[7]};
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: ${(props) => props.theme.spacing[5]};
+  padding-left: ${(props) => props.theme.spacing[8]};
+  padding-right: ${(props) => props.theme.spacing[8]};
+  padding-bottom: ${(props) => props.theme.spacing[5]};
   background-color: green;
 `;
 
@@ -65,6 +71,8 @@ const SubDescrptionBox = styled.div`
 `;
 
 const Title = styled.div`
+  max-width: 60%;
+  margin-bottom: ${(props) => props.theme.spacing[3]};
   font-size: ${(props) => props.theme.fontSize.subtitle};
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 700;
