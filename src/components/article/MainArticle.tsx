@@ -29,6 +29,9 @@ export function MainArticle({ article }: Props) {
       <DescriptionWrapper>
         <Title>{article.title}</Title>
         <SubDescrptionBox>
+          <AvatarWrapper>
+            <Avatar src={article.thumbNail} layout={'fill'} priority={true} />
+          </AvatarWrapper>
           <Author>{article.author}</Author>
           <ArticleDate>{article.updatedAt}</ArticleDate>
         </SubDescrptionBox>
@@ -54,6 +57,18 @@ const Thumbnail = styled(Image)`
   object-fit: cover;
 `;
 
+const AvatarWrapper = styled.div`
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 25px;
+`;
+
+const Avatar = styled(Image)`
+  object-fit: cover;
+  border-radius: 25px;
+`;
+
 const DescriptionWrapper = styled.div`
   display: flex;
   flex: 1 1 0;
@@ -68,6 +83,7 @@ const DescriptionWrapper = styled.div`
 
 const SubDescrptionBox = styled.div`
   display: flex;
+  flex: 1 1 0;
 `;
 
 const Title = styled.div`
