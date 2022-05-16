@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import type { NextPage } from 'next';
 
 import { Header } from '@common/ui/Header/Header';
+import { MainWideButton } from '@common/ui/MainWideButton/MainWideButton';
 import { MainArticle } from '@components/article/MainArticle';
 import { ArticleType } from '@modules/article/types/article';
 
@@ -23,7 +24,12 @@ const Home: NextPage<Props> = ({ articles }) => {
           <MainArticle article={leftArticle} />
           <MainArticle article={rightArticle} />
         </MainArticlesArea>
-        <ButtonList>Button</ButtonList>
+        <MainWideButtonsArea>
+          <MainWideButton />
+          <MainWideButton />
+          <MainWideButton />
+          <MainWideButton />
+        </MainWideButtonsArea>
         <Footer>Fotter</Footer>
       </Container>
     </>
@@ -39,7 +45,7 @@ const Container = styled.div`
   grid-template-areas:
     'header'
     'mainArticles'
-    'buttonList'
+    'mainWideButtons'
     'footer';
   width: 100vw;
 `;
@@ -53,8 +59,8 @@ const MainArticlesArea = styled.div`
   display: flex;
 `;
 
-const ButtonList = styled.div`
-  grid-area: buttonList;
+const MainWideButtonsArea = styled.div`
+  grid-area: mainWideButtons;
   background-color: skyblue;
 `;
 

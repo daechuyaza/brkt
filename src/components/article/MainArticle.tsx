@@ -44,13 +44,12 @@ const Container = styled.div`
   display: flex;
   flex: 1 1 0;
   flex-direction: column;
-  background-color: brown;
 `;
 
 const ThumbnailWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 60vh;
+  height: 55vh;
 `;
 
 const Thumbnail = styled(Image)`
@@ -59,14 +58,14 @@ const Thumbnail = styled(Image)`
 
 const AvatarWrapper = styled.div`
   position: relative;
-  width: 40px;
-  height: 40px;
+  width: 3.6rem;
+  height: 3.6rem;
   border-radius: 25px;
 `;
 
 const Avatar = styled(Image)`
   object-fit: cover;
-  border-radius: 25px;
+  border-radius: 2.5rem;
 `;
 
 const DescriptionWrapper = styled.div`
@@ -78,17 +77,19 @@ const DescriptionWrapper = styled.div`
   padding-left: ${(props) => props.theme.spacing[8]};
   padding-right: ${(props) => props.theme.spacing[8]};
   padding-bottom: ${(props) => props.theme.spacing[5]};
-  background-color: green;
 `;
 
 const SubDescrptionBox = styled.div`
   display: flex;
   flex: 1 1 0;
+  justify-content: space-between;
+  align-items: center;
+  width: 23rem;
 `;
 
 const Title = styled.div`
   max-width: 60%;
-  margin-bottom: ${(props) => props.theme.spacing[3]};
+  margin-bottom: ${(props) => props.theme.spacing[5]};
   font-size: ${(props) => props.theme.fontSize.subtitle};
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 700;
