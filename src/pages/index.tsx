@@ -47,7 +47,6 @@ const Container = styled.div`
     'mainArticles'
     'mainWideButtons'
     'footer';
-  width: 100vw;
 `;
 
 const HeaderArea = styled.div`

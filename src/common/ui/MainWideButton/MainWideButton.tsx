@@ -2,11 +2,15 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
+import { ArrowRight } from '@common/assets/icons/ArrowRight';
+
 export function MainWideButton() {
   return (
     <Container>
       <ButtonTitleWrapper>Article</ButtonTitleWrapper>
-      <SubDescriptionWrapper></SubDescriptionWrapper>
+      <SubDescriptionWrapper>
+        <ArrowRight />
+      </SubDescriptionWrapper>
     </Container>
   );
 }
@@ -15,6 +19,7 @@ const Container = styled.div`
   display: flex;
   flex: 1 1 0;
   flex-direction: row;
+  max-width: 100vw;
   height: 19.2rem;
 
   border-bottom-width: 1px;
