@@ -25,11 +25,15 @@ const Container = styled.div`
 `;
 
 const ButtonTitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
   padding-left: ${(props) => props.theme.spacing[8]};
+  font-size: ${(props) => props.theme.fontSize.headline1};
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 700;
 
   width: 50%;
   height: 100%;
-  background-color: red;
 `;
 
 const SubDescriptionWrapper = styled.div`
