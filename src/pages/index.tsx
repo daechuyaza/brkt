@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 import type { NextPage } from 'next';
 
+import { mainWideButtonsInformation } from '@common/constants/hardCoded';
+import { Footer } from '@common/ui/Footer/Footer';
 import { Header } from '@common/ui/Header/Header';
 import { MainWideButton } from '@common/ui/MainWideButton/MainWideButton';
 import { MainArticle } from '@components/article/MainArticle';
@@ -25,12 +27,17 @@ const Home: NextPage<Props> = ({ articles }) => {
           <MainArticle article={rightArticle} />
         </MainArticlesArea>
         <MainWideButtonsArea>
-          <MainWideButton />
-          <MainWideButton />
-          <MainWideButton />
-          <MainWideButton />
+          {mainWideButtonsInformation.map((information, index) => (
+            <MainWideButton
+              key={index}
+              title={information.title}
+              description={information.description}
+            />
+          ))}
         </MainWideButtonsArea>
-        <Footer>Fotter</Footer>
+        <FooterArea>
+          <Footer />
+        </FooterArea>
       </Container>
     </>
   );
@@ -60,12 +67,13 @@ const MainArticlesArea = styled.div`
 
 const MainWideButtonsArea = styled.div`
   grid-area: mainWideButtons;
-  background-color: skyblue;
+  border-top-width: 1px;
+  border-top-color: ${(props) => props.theme.colors.onSurface};
+  border-top-style: solid;
 `;
 
-const Footer = styled.div`
+const FooterArea = styled.div`
   grid-area: footer;
-  background-color: purple;
 `;
 
 export async function getStaticProps() {

@@ -4,13 +4,19 @@ import styled from '@emotion/styled';
 
 import { ArrowRight } from '@common/assets/icons/ArrowRight';
 
-export function MainWideButton() {
+type Props = {
+  title: string;
+  description: string;
+};
+
+export function MainWideButton({ title, description }: Props) {
   return (
     <Container>
-      <ButtonTitleWrapper>Article</ButtonTitleWrapper>
-      <SubDescriptionWrapper>
+      <ButtonTitle>{title}</ButtonTitle>
+      <DescriptionWrapper>
+        <Description>{description}</Description>
         <ArrowRight />
-      </SubDescriptionWrapper>
+      </DescriptionWrapper>
     </Container>
   );
 }
@@ -26,10 +32,9 @@ const Container = styled.div`
   border-bottom-color: ${(props) => props.theme.colors.onSurface};
   border-bottom-style: solid;
   align-items: center;
-  background-color: green;
 `;
 
-const ButtonTitleWrapper = styled.div`
+const ButtonTitle = styled.div`
   display: flex;
   align-items: center;
   padding-left: ${(props) => props.theme.spacing[8]};
@@ -37,12 +42,26 @@ const ButtonTitleWrapper = styled.div`
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 700;
 
+  white-space: nowrap;
+  overflow: hidden;
+
   width: 50%;
   height: 100%;
 `;
 
-const SubDescriptionWrapper = styled.div`
+const DescriptionWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding-left: ${(props) => props.theme.spacing[6]};
+  padding-right: ${(props) => props.theme.spacing[8]};
   width: 50%;
   height: 100%;
+`;
+
+const Description = styled.div`
+  width: 70%;
+  color: ${(props) => props.theme.colors.secondary};
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: ${(props) => props.theme.fontSize.body1};
 `;
