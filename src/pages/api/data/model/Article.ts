@@ -1,5 +1,5 @@
-import { Nullable } from "../../../../common/utils/TypeUtils";
-import { Series, User } from "./index";
+import { Nullable } from '@common/utils';
+import { Series, User } from './index';
 
 export interface Article {
     id: number,
