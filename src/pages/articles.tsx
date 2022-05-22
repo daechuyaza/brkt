@@ -1,7 +1,7 @@
-import { NextPage } from "next/types";
-import { useQuery } from "react-query";
-import { Article } from "./api/data/model";
-import ArticleRepository from "./api/repository";
+import { NextPage } from 'next/types';
+import { useQuery } from 'react-query';
+import { Article } from './api/data/model';
+import ArticleRepository from './api/repository';
 
 const getArticleList = (): Promise<{ articles: Article[] }> => new ArticleRepository().getArticleList();
 

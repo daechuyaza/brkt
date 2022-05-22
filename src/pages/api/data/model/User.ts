@@ -1,4 +1,5 @@
-import { Nullable } from "../../../../common/utils/TypeUtils";
+import { Nullable } from '@common/utils';
+
 
 export enum UserRole {
     ADMIN,
