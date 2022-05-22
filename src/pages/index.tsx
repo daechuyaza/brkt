@@ -1,7 +1,10 @@
 import styled from '@emotion/styled';
 import type { NextPage } from 'next';
 
+import { mainWideButtonsInformation } from '@common/constants/hardCoded';
+import { Footer } from '@common/ui/Footer/Footer';
 import { Header } from '@common/ui/Header/Header';
+import { MainWideButton } from '@common/ui/MainWideButton/MainWideButton';
 import { MainArticle } from '@components/article/MainArticle';
 import { ArticleType } from '@modules/article/types/article';
 
@@ -21,10 +24,20 @@ const Home: NextPage<Props> = ({ articles }) => {
         </HeaderArea>
         <MainArticlesArea>
           <MainArticle article={leftArticle} />
-          <MainArticle article={leftArticle} />
+          <MainArticle article={rightArticle} />
         </MainArticlesArea>
-        <ButtonList>Button</ButtonList>
-        <Footer>Fotter</Footer>
+        <MainWideButtonsArea>
+          {mainWideButtonsInformation.map((information, index) => (
+            <MainWideButton
+              key={index}
+              title={information.title}
+              description={information.description}
+            />
+          ))}
+        </MainWideButtonsArea>
+        <FooterArea>
+          <Footer />
+        </FooterArea>
       </Container>
     </>
   );
@@ -39,9 +52,8 @@ const Container = styled.div`
   grid-template-areas:
     'header'
     'mainArticles'
-    'buttonList'
+    'mainWideButtons'
     'footer';
-  width: 100vw;
 `;
 
 const HeaderArea = styled.div`
@@ -51,17 +63,17 @@ const HeaderArea = styled.div`
 const MainArticlesArea = styled.div`
   grid-area: mainArticles;
   display: flex;
-  background-color: red;
 `;
 
-const ButtonList = styled.div`
-  grid-area: buttonList;
-  background-color: skyblue;
+const MainWideButtonsArea = styled.div`
+  grid-area: mainWideButtons;
+  border-top-width: 1px;
+  border-top-color: ${(props) => props.theme.colors.onSurface};
+  border-top-style: solid;
 `;
 
-const Footer = styled.div`
+const FooterArea = styled.div`
   grid-area: footer;
-  background-color: purple;
 `;
 
 export async function getStaticProps() {
