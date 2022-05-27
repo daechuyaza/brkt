@@ -16,6 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Global styles={global} />
       <ThemeProvider theme={lightTheme}>
         <Component {...pageProps} />
+        <div id="root-modal" />
       </ThemeProvider>
     </RecoilRoot>
   );
