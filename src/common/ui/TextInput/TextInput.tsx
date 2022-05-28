@@ -8,7 +8,7 @@ type IFormValue = {
 };
 
 type Props = {
-  defaultText: string;
+  defaultText?: string;
   disabled?: boolean;
   name: Path<IFormValue>;
   placeholder?: string;
