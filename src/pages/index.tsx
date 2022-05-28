@@ -4,8 +4,8 @@ import type { NextPage } from 'next';
 import { mainWideButtonsInformation } from '@common/constants/hardCoded';
 import { Footer } from '@common/ui/Footer/Footer';
 import { Header } from '@common/ui/Header/Header';
-import { MainWideButton } from '@common/ui/MainWideButton/MainWideButton';
 import { MainArticle } from '@components/article/MainArticle';
+import { MainWideButton } from '@components/main/MainWideButton/MainWideButton';
 import { ArticleType } from '@modules/article/types/article';
 
 type Props = {

@@ -1,5 +1,5 @@
 export const fontSize = {
-  headline1: '9.6rem',
+  headline1: '9rem',
   headline2: '3.2rem',
   subtitle: '2.4rem',
   body1: '2.2rem',
