@@ -7,12 +7,18 @@ import { Header } from '@common/ui/Header/Header';
 import { MainWideButton } from '@common/ui/MainWideButton/MainWideButton';
 import { MainArticle } from '@components/article/MainArticle';
 import { ArticleType } from '@modules/article/types/article';
+import { useRouter } from 'next/router';
+import { Modal } from '@common/ui/Modal/Modal';
+import { LoginForm } from '@components/auth/LoginForm';
 
 type Props = {
   articles: ArticleType[];
 };
 
 const Home: NextPage<Props> = ({ articles }) => {
+  const router = useRouter();
+  const { auth } = router.query;
+
   const leftArticle = articles[0];
   const rightArticle = articles[1];
 
@@ -39,6 +45,11 @@ const Home: NextPage<Props> = ({ articles }) => {
           <Footer />
         </FooterArea>
       </Container>
+      {auth && (
+        <Modal active onClickBackdrop={() => router.push('/')}>
+          {auth === 'login' ? <LoginForm /> : <div>signin</div>}
+        </Modal>
+      )}
     </>
   );
 };

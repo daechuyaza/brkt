@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 import styled from '@emotion/styled';
@@ -23,7 +24,9 @@ export function Navigator() {
           <Search />
           <DarkMode />
         </SubButtonsBox>
-        <LoginButton>LOGIN</LoginButton>
+        <Link href="/?auth=login" as="/login">
+          <LoginButton>LOGIN</LoginButton>
+        </Link>
       </RightWrapper>
     </Container>
   );
@@ -89,6 +92,7 @@ const SubButtonsBox = styled.div`
 
 const LoginButton = styled.a`
   align-self: center;
+  cursor: pointer;
   font-size: 2.8rem;
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
