@@ -1,11 +1,13 @@
 import styled from '@emotion/styled';
 import { FormProvider, useForm } from 'react-hook-form';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
+import { ROUTES } from '@common/constants/hardCoded';
 import { Button } from '@common/ui/Button/Button';
 
 import { LabelTextInput } from './LabelTextInput';
 import { SocialLogInButtons } from './SocialLogInButtons';
-import Link from 'next/link';
 
 type LogInFormValues = {
   email: string;
@@ -13,6 +15,8 @@ type LogInFormValues = {
 };
 
 export function LogInForm() {
+  const router = useRouter();
+
   const methods = useForm({
     mode: 'onChange',
     defaultValues: {
@@ -51,7 +55,7 @@ export function LogInForm() {
         BRKT와 함께 하세요. 글을 쓰고, 댓글을 남기고, 지식을 나누세요. <br />
         아이디가 없으시다면?
       </Caption>
-      <Link href="/?auth=signup" as="/signup">
+      <Link href={`${router.pathname}?auth=signup`} as={ROUTES.SIGN_UP}>
         <SignInButton>회원가입하러 가기</SignInButton>
       </Link>
       <FormProvider {...methods}>
