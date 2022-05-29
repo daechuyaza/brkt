@@ -63,12 +63,13 @@ function Subscribe() {
 }
 
 const Container = styled.div`
-  padding-left: ${(props) => props.theme.spacing[8]};
-  padding-right: ${(props) => props.theme.spacing[8]};
+  padding-left: ${(props) => props.theme.spacing[12]};
+  padding-right: ${(props) => props.theme.spacing[12]};
 `;
 
 const Heading = styled.h1`
   font-size: ${(props) => props.theme.fontSize.headline1};
+  padding-top: ${(props) => props.theme.spacing[6]};
 `;
 
 const Caption = styled.span`

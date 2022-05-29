@@ -25,16 +25,16 @@ function About() {
 }
 
 const LogoWrapper = styled.div`
-  width: 40%;
+  width: 60%;
   margin-bottom: ${(props) => props.theme.spacing[6]};
   margin-top: ${(props) => props.theme.spacing[8]};
-  padding-left: ${(props) => props.theme.spacing[8]};
-  padding-right: ${(props) => props.theme.spacing[8]};
+  padding-left: ${(props) => props.theme.spacing[12]};
+  padding-right: ${(props) => props.theme.spacing[12]};
 `;
 
 const DescriptionBox = styled.div`
-  padding-left: ${(props) => props.theme.spacing[9]};
-  padding-right: ${(props) => props.theme.spacing[9]};
+  padding-left: ${(props) => props.theme.spacing[12]};
+  padding-right: ${(props) => props.theme.spacing[12]};
   margin-bottom: 72px;
 `;
 
