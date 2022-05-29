@@ -1,22 +1,32 @@
 import Link from 'next/link';
 import React from 'react';
+import { useRouter } from 'next/router';
 
 import styled from '@emotion/styled';
 
 import { DarkMode } from '@common/assets/icons/DarkMode';
 import { Logo } from '@common/assets/icons/Logo';
 import { Search } from '@common/assets/icons/Search';
+import { ROUTES } from '@common/constants/hardCoded';
 
 export function Navigator() {
+  const router = useRouter();
+
   return (
     <Container>
       <LeftWrapper>
-        <LogoBox>
-          <Logo />
-        </LogoBox>
+        <Link href={ROUTES.MAIN}>
+          <LogoBox>
+            <Logo />
+          </LogoBox>
+        </Link>
         <NavigatorButtonsBox>
-          <AboutButton>About Us</AboutButton>
-          <ContactButton>Contact</ContactButton>
+          <Link href={ROUTES.ABOUT}>
+            <AboutButton>About Us</AboutButton>
+          </Link>
+          <Link href={ROUTES.SUBSCRIBE}>
+            <SubscribeButton>Subscribe</SubscribeButton>
+          </Link>
         </NavigatorButtonsBox>
       </LeftWrapper>
       <RightWrapper>
@@ -24,7 +34,7 @@ export function Navigator() {
           <Search />
           <DarkMode />
         </SubButtonsBox>
-        <Link href="/?auth=login" as="/login">
+        <Link href={`${router.pathname}?auth=login`} as={ROUTES.LOG_IN}>
           <LogInButton>LOGIN</LogInButton>
         </Link>
       </RightWrapper>
@@ -57,6 +67,7 @@ const RightWrapper = styled.div`
 const LogoBox = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
   flex-shrink: 1;
   width: 11.6rem;
   height: '100%';
@@ -72,13 +83,16 @@ const NavigatorButtonsBox = styled.div`
 `;
 
 const AboutButton = styled.a`
+  cursor: pointer;
   font-size: 2.8rem;
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   margin-right: ${(props) => props.theme.spacing[5]};
+  white-space: nowrap;
 `;
 
-const ContactButton = styled.a`
+const SubscribeButton = styled.a`
+  cursor: pointer;
   font-size: 2.8rem;
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;

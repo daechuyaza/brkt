@@ -16,3 +16,11 @@ export const mainWideButtonsInformation = [
     description: ''
   }
 ] as const;
+
+export const ROUTES = {
+  MAIN: '/',
+  ABOUT: '/about',
+  SUBSCRIBE: '/subscribe',
+  LOG_IN: '/login',
+  SIGN_UP: '/signup'
+} as const;
