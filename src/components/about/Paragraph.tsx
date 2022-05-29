@@ -17,7 +17,7 @@ export function Paragraph({ title, description }: Props) {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
   margin-bottom: 48px;
   max-width: 60%;
 `;
