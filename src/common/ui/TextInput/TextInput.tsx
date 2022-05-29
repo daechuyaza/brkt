@@ -51,7 +51,7 @@ export function TextInput({
         />
         {surfix}
       </InputWrapper>
-      {errors[name] && <ErrorMessage>{errors[name].message}</ErrorMessage>}
+      <ErrorMessage>{errors[name]?.message}</ErrorMessage>
     </>
   );
 }
@@ -85,6 +85,7 @@ const Input = styled.input<{
   display: block;
   flex: 1;
   outline: none;
+  padding: 0;
 
   ${(props) => sizes[props.$size](props.theme)};
 `;
@@ -101,6 +102,7 @@ const InputWrapper = styled.div`
 const ErrorMessage = styled.span`
   color: ${(props) => props.theme.colors.error};
   display: block;
+  height: 16px;
   font-size: ${(props) => props.theme.fontSize.caption2};
   margin-top: ${(props) => props.theme.spacing[0]};
 `;
