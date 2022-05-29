@@ -1,6 +1,8 @@
 export type ArticleType = {
   title: string;
   author: string;
-  thumbNail: string;
+  thumbnail: string;
   updatedAt: string;
+  authorThumbnail: string;
+  description: string;
 };
