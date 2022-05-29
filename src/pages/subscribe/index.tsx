@@ -1,7 +1,8 @@
-import { Button } from '@common/ui/Button/Button';
-import { TextInput } from '@common/ui/TextInput/TextInput';
 import styled from '@emotion/styled';
 import { FormProvider, useForm } from 'react-hook-form';
+
+import { Button } from '@common/ui/Button/Button';
+import { TextInput } from '@common/ui/TextInput/TextInput';
 
 type FormValue = {
   email: string;
