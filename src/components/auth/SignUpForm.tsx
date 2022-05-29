@@ -66,11 +66,11 @@ export function SignUpForm() {
   };
 
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(signUp)}>
-        <Container>
-          <Heading>회원가입</Heading>
-          <Caption>BRKT와 함께 하세요. 글을 쓰고, 댓글을 남기고, 지식을 나누세요.</Caption>
+    <Container>
+      <Heading>회원가입</Heading>
+      <Caption>BRKT와 함께 하세요. 글을 쓰고, 댓글을 남기고, 지식을 나누세요.</Caption>
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(signUp)}>
           <InputBox>
             <LabelTextInput
               name="email"
@@ -95,9 +95,9 @@ export function SignUpForm() {
             />
           </InputBox>
           <Button type="submit" text="가입하기" disabled={!isValid || !isDirty} />
-        </Container>
-      </form>
-    </FormProvider>
+        </form>
+      </FormProvider>
+    </Container>
   );
 }
 
