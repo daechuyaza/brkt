@@ -25,7 +25,7 @@ export function Navigator() {
           <DarkMode />
         </SubButtonsBox>
         <Link href="/?auth=login" as="/login">
-          <LoginButton>LOGIN</LoginButton>
+          <LogInButton>LOGIN</LogInButton>
         </Link>
       </RightWrapper>
     </Container>
@@ -90,7 +90,7 @@ const SubButtonsBox = styled.div`
   margin-right: ${(props) => props.theme.spacing[5]};
 `;
 
-const LoginButton = styled.a`
+const LogInButton = styled.a`
   align-self: center;
   cursor: pointer;
   font-size: 2.8rem;
