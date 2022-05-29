@@ -45,8 +45,8 @@ export function LabelTextInput({
 }
 
 const Container = styled.div`
-  max-width: 560px;
-  width: 100%;
+  min-width: 300px;
+  width: 560px;
 `;
 
 const Label = styled.label`
@@ -54,5 +54,6 @@ const Label = styled.label`
 `;
 
 const LabelText = styled.span`
+  font-size: ${(props) => props.theme.fontSize.caption2};
   font-weight: bold;
 `;

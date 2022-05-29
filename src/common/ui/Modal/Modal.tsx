@@ -17,14 +17,16 @@ export function Modal({ active = false, children, onClickBackdrop }: Props) {
   const ref = useRef<Element | null>(null);
 
   useEffect(() => {
-    setMounted(true);
+    if (active) {
+      setMounted(true);
 
-    if (document) {
-      const dom = document.getElementById('root-modal');
+      if (document) {
+        const dom = document.getElementById('root-modal');
 
-      ref.current = dom;
+        ref.current = dom;
+      }
     }
-  }, []);
+  }, [active]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {

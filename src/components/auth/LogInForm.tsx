@@ -4,14 +4,15 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { Button } from '@common/ui/Button/Button';
 
 import { LabelTextInput } from './LabelTextInput';
-import { SocialLoginButtons } from './SocialLoginButtons';
+import { SocialLogInButtons } from './SocialLogInButtons';
+import Link from 'next/link';
 
-type LoginFormValues = {
+type LogInFormValues = {
   email: string;
   password: string;
 };
 
-export function LoginForm() {
+export function LogInForm() {
   const methods = useForm({
     mode: 'onChange',
     defaultValues: {
@@ -25,7 +26,7 @@ export function LoginForm() {
     formState: { isValid, isDirty }
   } = methods;
 
-  function login(data: LoginFormValues) {
+  function logIn(data: LogInFormValues) {
     const { email, password } = data;
     console.log(email, password);
     return;
@@ -44,15 +45,17 @@ export function LoginForm() {
   };
 
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(login)}>
-        <Container>
-          <Heading>시작하기</Heading>
-          <Caption>
-            BRKT와 함께 하세요. 글을 쓰고, 댓글을 남기고, 지식을 나누세요. <br />
-            아이디가 없으시다면?
-          </Caption>
-          <SignInButton>회원가입하러 가기</SignInButton>
+    <Container>
+      <Heading>시작하기</Heading>
+      <Caption>
+        BRKT와 함께 하세요. 글을 쓰고, 댓글을 남기고, 지식을 나누세요. <br />
+        아이디가 없으시다면?
+      </Caption>
+      <Link href="/?auth=signup" as="/signup">
+        <SignInButton>회원가입하러 가기</SignInButton>
+      </Link>
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(logIn)}>
           <InputBox>
             <LabelTextInput
               name="email"
@@ -69,15 +72,15 @@ export function LoginForm() {
               validation={passwordValidation}
             />
           </InputBox>
-          <SocialLogInBox>
-            <Subtitle>소셜로 로그인 하기</Subtitle>
-            <SocialLoginButtons />
-            <Caption>혹은</Caption>
-            <Button type="submit" text="이메일로 로그인" disabled={!isValid || !isDirty} />
-          </SocialLogInBox>
-        </Container>
-      </form>
-    </FormProvider>
+        </form>
+      </FormProvider>
+      <Button type="submit" text="이메일로 로그인" disabled={!isValid || !isDirty} />
+      <SocialLogInBox>
+        <Caption>혹은</Caption>
+        <Subtitle>소셜로 로그인 하기</Subtitle>
+        <SocialLogInButtons />
+      </SocialLogInBox>
+    </Container>
   );
 }
 
@@ -115,12 +118,13 @@ const InputBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
-  margin-bottom: 48px;
+  margin-bottom: 32px;
 `;
 
 const SocialLogInBox = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
+  margin-top: 16px;
 `;

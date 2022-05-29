@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { GithubLogo } from '@common/assets/icons/GithubLogo';
 import { GoogleLogo } from '@common/assets/icons/GoogleLogo';
 
-export function SocialLoginButtons() {
+export function SocialLogInButtons() {
   return (
     <Container>
       <SocialLogInbutton>

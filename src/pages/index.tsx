@@ -9,7 +9,8 @@ import { MainArticle } from '@components/article/MainArticle';
 import { ArticleType } from '@modules/article/types/article';
 import { useRouter } from 'next/router';
 import { Modal } from '@common/ui/Modal/Modal';
-import { LoginForm } from '@components/auth/LoginForm';
+import { LogInForm } from '@components/auth/LogInForm';
+import { SignUpForm } from '@components/auth/SignupForm';
 
 type Props = {
   articles: ArticleType[];
@@ -45,11 +46,14 @@ const Home: NextPage<Props> = ({ articles }) => {
           <Footer />
         </FooterArea>
       </Container>
-      {auth && (
-        <Modal active onClickBackdrop={() => router.push('/')}>
-          {auth === 'login' ? <LoginForm /> : <div>signin</div>}
-        </Modal>
-      )}
+
+      <Modal
+        active={router.asPath === '/login' || router.asPath === '/signup'}
+        onClickBackdrop={() => router.push('/')}
+      >
+        {auth === 'login' && <LogInForm />}
+        {auth === 'signup' && <SignUpForm />}
+      </Modal>
     </>
   );
 };
