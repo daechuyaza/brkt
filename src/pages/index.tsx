@@ -1,16 +1,16 @@
 import styled from '@emotion/styled';
 import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
 
+import { LogInForm } from '@components/auth/LogInForm';
+import { SignUpForm } from '@components/auth/SignUpForm';
 import { mainWideButtonsInformation } from '@common/constants/hardCoded';
 import { Footer } from '@common/ui/Footer/Footer';
 import { Header } from '@common/ui/Header/Header';
 import { MainWideButton } from '@common/ui/MainWideButton/MainWideButton';
 import { MainArticle } from '@components/article/MainArticle';
 import { ArticleType } from '@modules/article/types/article';
-import { useRouter } from 'next/router';
 import { Modal } from '@common/ui/Modal/Modal';
-import { LogInForm } from '@components/auth/LogInForm';
-import { SignUpForm } from '@components/auth/SignupForm';
 
 type Props = {
   articles: ArticleType[];

@@ -35,7 +35,7 @@ const Container = styled.button<{
     return props.theme.colors[props.colorTheme];
   }};
   color: ${(props) => props.theme.colors.surface};
-  cursor: ${(props) => (props.disabled ? 'default' : 'cursor')};
+  cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
   border: none;
   font-size: ${(props) => props.theme.fontSize.caption2};
   font-weight: bold;
