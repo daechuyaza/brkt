@@ -15,18 +15,18 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-      <QueryClientProvider client={ReactQueryUtils.getQueryClient()}>
-          <RecoilRoot>
-              <Global styles={global}/>
-              <ThemeProvider theme={lightTheme}>
-                  <Layout>
-                      <Component {...pageProps} />
-                      <AuthModal/>
-                  </Layout>
-                  <div id="root-modal"/>
-              </ThemeProvider>
-          </RecoilRoot>
-      </QueryClientProvider>
+    <QueryClientProvider client={ReactQueryUtils.getQueryClient()}>
+      <RecoilRoot>
+        <Global styles={global} />
+        <ThemeProvider theme={lightTheme}>
+          <Layout>
+            <Component {...pageProps} />
+            <AuthModal />
+          </Layout>
+          <div id="root-modal" />
+        </ThemeProvider>
+      </RecoilRoot>
+    </QueryClientProvider>
   );
 }
 

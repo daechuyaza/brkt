@@ -65,7 +65,7 @@ model Post {
   title     String    @db.VarChar
   content   String    @db.VarChar
   thumbnail String    @db.VarChar
-  viewCount Int    @default(0) @map(name: "view_count")
+  viewCount Int       @default(0) @map(name: "view_count")
   isPublic  Boolean   @default(false) @map(name: "is_public")
   createdAt DateTime  @default(now()) @map(name: "created_at")
   updatedAt DateTime? @updatedAt @map(name: "updated_at")
