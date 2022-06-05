@@ -16,7 +16,7 @@ model User {
   profileImage String?   @map(name: "profile_image") @db.VarChar
   role         Role      @default(USER)
   createdAt    DateTime  @default(now()) @map(name: "created_at")
-  updatedAt    DateTime? @updatedAt @map(name: "updated_at")
+  updatedAt    DateTime  @default(now()) @updatedAt @map(name: "updated_at")
   deletedAt    DateTime? @map(name: "deleted_at")
 
   Post              Post[]
@@ -37,7 +37,7 @@ model Follower {
   followingUser   User      @relation("FollowingUser", fields: [followingUserId], references: [id])
   followingUserId Int       @map(name: "following_user_id")
   createdAt       DateTime  @default(now()) @map(name: "created_at")
-  updatedAt       DateTime? @updatedAt @map(name: "updated_at")
+  updatedAt       DateTime  @default(now()) @updatedAt @map(name: "updated_at")
   deletedAt       DateTime? @map(name: "deleted_at")
 
   @@map(name: "Followers")
@@ -50,7 +50,7 @@ model Link {
   type      LinkType
   url       String    @db.VarChar
   createdAt DateTime  @default(now()) @map(name: "created_at")
-  updatedAt DateTime? @updatedAt @map(name: "updated_at")
+  updatedAt DateTime  @default(now()) @updatedAt @map(name: "updated_at")
   deletedAt DateTime? @map(name: "deleted_at")
 
   @@map(name: "Links")
@@ -65,10 +65,10 @@ model Post {
   title     String    @db.VarChar
   content   String    @db.VarChar
   thumbnail String    @db.VarChar
-  viewCount Int    @default(0) @map(name: "view_count")
+  viewCount Int       @default(0) @map(name: "view_count")
   isPublic  Boolean   @default(false) @map(name: "is_public")
   createdAt DateTime  @default(now()) @map(name: "created_at")
-  updatedAt DateTime? @updatedAt @map(name: "updated_at")
+  updatedAt DateTime  @default(now()) @updatedAt @map(name: "updated_at")
   deletedAt DateTime? @map(name: "deleted_at")
 
   LikesOnPosts LikesOnPosts[]
@@ -83,7 +83,7 @@ model LikesOnPosts {
   post      Post      @relation(fields: [postId], references: [id])
   postId    Int       @map(name: "post_id")
   createdAt DateTime  @default(now()) @map(name: "created_at")
-  updatedAt DateTime? @updatedAt @map(name: "updated_at")
+  updatedAt DateTime  @default(now()) @updatedAt @map(name: "updated_at")
   deletedAt DateTime? @map(name: "deleted_at")
 }
 
@@ -95,7 +95,7 @@ model Comment {
   postId    Int       @map(name: "post_id")
   comment   String    @db.VarChar
   createdAt DateTime  @default(now()) @map(name: "created_at")
-  updatedAt DateTime? @updatedAt @map(name: "updated_at")
+  updatedAt DateTime  @default(now()) @updatedAt @map(name: "updated_at")
   deletedAt DateTime? @map(name: "deleted_at")
 
   RepliesOnComments RepliesOnComments[]
@@ -110,7 +110,7 @@ model RepliesOnComments {
   commentId Int       @map(name: "comment_id")
   reply     String    @db.VarChar
   createdAt DateTime  @default(now()) @map(name: "created_at")
-  updatedAt DateTime? @updatedAt @map(name: "updated_at")
+  updatedAt DateTime  @default(now()) @updatedAt @map(name: "updated_at")
   deletedAt DateTime? @map(name: "deleted_at")
 }
 
@@ -122,7 +122,7 @@ model Series {
   description String    @db.VarChar
   thumbnail   String    @db.VarChar
   createdAt   DateTime  @default(now()) @map(name: "created_at")
-  updatedAt   DateTime? @updatedAt @map(name: "updated_at")
+  updatedAt   DateTime  @default(now()) @updatedAt @map(name: "updated_at")
   deletedAt   DateTime? @map(name: "deleted_at")
 
   Post Post[]
@@ -132,7 +132,7 @@ model Subscription {
   id        Int       @id @default(autoincrement())
   email     String
   createdAt DateTime  @default(now()) @map(name: "created_at")
-  updatedAt DateTime? @updatedAt @map(name: "updated_at")
+  updatedAt DateTime  @default(now()) @updatedAt @map(name: "updated_at")
   deletedAt DateTime? @map(name: "deleted_at")
 
   @@map(name: "Subscriptions")
