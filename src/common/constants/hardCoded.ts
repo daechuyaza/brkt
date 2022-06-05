@@ -16,3 +16,5 @@ export const mainWideButtonsInformation = [
     description: ''
   }
 ] as const;
+
+export const MARQUEE_SPEED = '65s';
