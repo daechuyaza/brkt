@@ -65,7 +65,7 @@ model Post {
   title     String    @db.VarChar
   content   String    @db.VarChar
   thumbnail String    @db.VarChar
-  viewCount BigInt    @map(name: "view_count")
+  viewCount Int       @default(0) @map(name: "view_count")
   isPublic  Boolean   @default(false) @map(name: "is_public")
   createdAt DateTime  @default(now()) @map(name: "created_at")
   updatedAt DateTime? @updatedAt @map(name: "updated_at")
@@ -93,7 +93,7 @@ model Comment {
   userId    Int       @map(name: "user_id")
   post      Post      @relation(fields: [postId], references: [id])
   postId    Int       @map(name: "post_id")
-  comment   String    @db.VarChar()
+  comment   String    @db.VarChar
   createdAt DateTime  @default(now()) @map(name: "created_at")
   updatedAt DateTime? @updatedAt @map(name: "updated_at")
   deletedAt DateTime? @map(name: "deleted_at")
