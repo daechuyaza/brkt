@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import type { NextPage } from 'next';
 
 import { mainWideButtonsInformation } from '@common/constants/hardCoded';
+import { Marquee } from '@common/ui';
 import { MainWideButton } from '@common/ui/MainWideButton/MainWideButton';
 import { MainArticle } from '@components/article/MainArticle';
 import { ArticleType } from '@modules/article/types/article';
@@ -16,6 +17,9 @@ const Home: NextPage<Props> = ({ articles }) => {
 
   return (
     <>
+      <MarqueeArea>
+        <Marquee />
+      </MarqueeArea>
       <MainArticlesArea>
         <MainArticle article={leftArticle} />
         <MainArticle article={rightArticle} />
@@ -33,13 +37,17 @@ const Home: NextPage<Props> = ({ articles }) => {
   );
 };
 
+const MarqueeArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 5.7rem;
+`;
+
 const MainArticlesArea = styled.div`
-  grid-area: mainArticles;
   display: flex;
 `;
 
 const MainWideButtonsArea = styled.div`
-  grid-area: mainWideButtons;
   border-top-width: 1px;
   border-top-color: ${(props) => props.theme.colors.onSurface};
   border-top-style: solid;

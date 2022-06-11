@@ -68,6 +68,7 @@
     "no-useless-return": "off",
     "consistent-return": "off",
     "no-restricted-globals": "off",
+    "no-useless-escape": "off",
     "no-shadow": "off",
     "no-alert": "off",
     "react-hooks/exhaustive-deps": "off",
@@ -76,6 +77,12 @@
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        "checksVoidReturn": false
+      }
+    ],
     "newline-before-return": "warn",
     "import/no-self-import": "error",
     "import/no-cycle": "error",

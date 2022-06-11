@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 
-import { LogInForm } from '@components/auth/LogInForm';
-import { SignUpForm } from '@components/auth/SignUpForm';
 import { ROUTES } from '@common/constants/hardCoded';
 import { Modal } from '@common/ui/Modal/Modal';
+import { LogInForm } from '@components/auth/LogInForm';
+import { SignUpForm } from '@components/auth/SignUpForm';
 
 function AuthModal() {
   const router = useRouter();

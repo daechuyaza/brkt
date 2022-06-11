@@ -2,14 +2,13 @@ import React from 'react';
 
 import styled from '@emotion/styled';
 
-import { Marquee } from './Marquee/Marquee';
+import { Marquee } from '../Marquee/Marquee';
 import { Navigator } from './Navigator/Navigator';
 
 export function Header() {
   return (
     <Container>
       <Navigator />
-      <Marquee />
     </Container>
   );
 }

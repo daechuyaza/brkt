@@ -7,13 +7,13 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function Layout({ children }: Props) {
+export function Layout({ children }: Props) {
   return (
     <Container>
       <HeaderArea>
         <Header />
       </HeaderArea>
-      {children}
+      <ContentArea>{children}</ContentArea>
       <FooterArea>
         <Footer />
       </FooterArea>
@@ -24,16 +24,19 @@ export default function Layout({ children }: Props) {
 const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  grid-auto-rows: minmax(11.4rem, auto);
+  grid-auto-rows: minmax(5.7rem, auto);
   grid-template-areas:
     'header'
-    'mainArticles'
-    'mainWideButtons'
+    'content'
     'footer';
 `;
 
 const HeaderArea = styled.div`
   grid-area: header;
+`;
+
+const ContentArea = styled.div`
+  grid-area: content;
 `;
 
 const FooterArea = styled.div`

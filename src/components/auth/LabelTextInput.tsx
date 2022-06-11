@@ -1,5 +1,6 @@
-import styled from '@emotion/styled';
 import { InputHTMLAttributes } from 'react';
+
+import styled from '@emotion/styled';
 import { Path, RegisterOptions } from 'react-hook-form';
 
 import { TextInput } from '@common/ui/TextInput/TextInput';
