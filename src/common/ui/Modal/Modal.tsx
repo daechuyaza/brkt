@@ -1,10 +1,9 @@
-import { useRef, useState, useEffect } from 'react';
-
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
-import { popInFromBottom, popOutToBottom } from '../../../styles/keyframes';
+import { popInFromBottom, popOutToBottom } from '@styles/keyframes';
 
 type Props = {
   active: boolean;
@@ -39,7 +38,7 @@ export function Modal({ active = false, children, onClickBackdrop }: Props) {
     return () => {
       clearTimeout(timeout);
     };
-  }, [mounted]);
+  }, [mounted, active]);
 
   function handleAnimationEnd() {
     if (!active) {
@@ -62,9 +61,7 @@ export function Modal({ active = false, children, onClickBackdrop }: Props) {
   return null;
 }
 
-const Container = styled.div<{
-  active: boolean;
-}>`
+const Container = styled.div`
   display: flex;
   position: fixed;
   top: 0;

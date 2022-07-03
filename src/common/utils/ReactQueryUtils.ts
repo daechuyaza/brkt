@@ -1,4 +1,5 @@
 import { InvalidateOptions, InvalidateQueryFilters, QueryClient, QueryKey } from 'react-query';
+
 import { isNil } from './ValidationUtils';
 
 export class ReactQueryUtils {
