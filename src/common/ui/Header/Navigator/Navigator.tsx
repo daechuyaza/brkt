@@ -1,8 +1,7 @@
-import React from 'react';
-
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import React from 'react';
 
 import { DarkMode } from '@common/assets/icons/DarkMode';
 import { Logo } from '@common/assets/icons/Logo';
@@ -15,16 +14,16 @@ export function Navigator() {
   return (
     <Container>
       <LeftWrapper>
-        <Link href={ROUTES.MAIN}>
+        <Link href={ROUTES.MAIN} passHref>
           <LogoBox>
             <Logo />
           </LogoBox>
         </Link>
         <NavigatorButtonsBox>
-          <Link href={ROUTES.ABOUT}>
+          <Link href={ROUTES.ABOUT} passHref>
             <AboutButton>About Us</AboutButton>
           </Link>
-          <Link href={ROUTES.SUBSCRIBE}>
+          <Link href={ROUTES.SUBSCRIBE} passHref>
             <SubscribeButton>Subscribe</SubscribeButton>
           </Link>
         </NavigatorButtonsBox>
@@ -34,7 +33,7 @@ export function Navigator() {
           <Search />
           <DarkMode />
         </SubButtonsBox>
-        <Link href={`${router.pathname}?auth=login`} as={ROUTES.LOG_IN}>
+        <Link href={`${router.pathname}?auth=login`} as={ROUTES.LOG_IN} passHref>
           <LogInButton>LOGIN</LogInButton>
         </Link>
       </RightWrapper>

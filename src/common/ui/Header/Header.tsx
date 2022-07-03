@@ -1,8 +1,8 @@
+import styled from '@emotion/styled';
 import React from 'react';
 
-import styled from '@emotion/styled';
-
 import { Marquee } from '../Marquee/Marquee';
+
 import { Navigator } from './Navigator/Navigator';
 
 export function Header() {

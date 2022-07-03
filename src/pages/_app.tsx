@@ -1,14 +1,15 @@
 import { Global, ThemeProvider } from '@emotion/react';
-import type { AppProps } from 'next/app';
-import { RecoilRoot } from 'recoil';
 import { QueryClientProvider } from 'react-query';
-import { ReactQueryUtils } from '@common/utils';
+import { RecoilRoot } from 'recoil';
 
 import { Layout } from '@common/ui';
+import { ReactQueryUtils } from '@common/utils';
 import AuthModal from '@components/auth/AuthModal';
 
 import { global } from '../styles/global';
 import { lightTheme } from '../styles/theme';
+
+import type { AppProps } from 'next/app';
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
   // eslint-disable-next-line global-require

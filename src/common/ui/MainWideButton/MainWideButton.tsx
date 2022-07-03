@@ -1,6 +1,5 @@
-import React from 'react';
-
 import styled from '@emotion/styled';
+import React from 'react';
 
 import { ArrowRight } from '@common/assets/icons/ArrowRight';
 

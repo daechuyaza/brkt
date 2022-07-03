@@ -1,13 +1,12 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
       "@common/*": ["./src/common/*"],
       "@components/*": ["./src/components/*"],
       "@modules/*": ["./src/modules/*"],
-      "@utils/*": ["./src/utils/*"],
       "@pages/*": ["./src/pages/*"],
-      "@routers/*": ["./src/routers/*"]
+      "@styles/*": ["./src/styles/*"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -27,6 +26,6 @@
     "allowSyntheticDefaultImports": true,
     "incremental": true
   },
-  "include": ["src/", "next-env.d.ts", "mocks/", "@types"],
+  "include": ["src/", "next-env.d.ts", "mocks/", "@types", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

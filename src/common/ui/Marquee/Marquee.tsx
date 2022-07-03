@@ -1,6 +1,5 @@
-import React from 'react';
-
 import styled from '@emotion/styled';
+import React from 'react';
 
 /**
  * TODO mediaquery로 ch 단위 촘촘하게 핸들링하기
