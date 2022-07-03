@@ -1,4 +1,5 @@
 import Axios from 'axios';
+
 import { GetArticleResponseDto } from '../data/dto';
 import mapGetArticlesResponseDtoToArticles from '../data/mapper';
 import { Article } from '../data/model';
