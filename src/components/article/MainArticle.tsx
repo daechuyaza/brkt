@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
+import React from 'react';
 
 import { ArticleType } from '@modules/article/types/article';
 
@@ -22,13 +23,13 @@ export function MainArticle({ article }: Props) {
   return (
     <Container>
       <ThumbnailWrapper>
-        <Thumbnail src={article.thumbNail} layout={'fill'} priority={true} />
+        <Thumbnail src={article.thumbnail} layout={'fill'} priority={true} />
       </ThumbnailWrapper>
       <DescriptionWrapper>
         <Title>{article.title}</Title>
         <SubDescrptionBox>
           <AvatarWrapper>
-            <Avatar src={article.thumbNail} layout={'fill'} priority={true} />
+            <Avatar src={article.authorThumbnail} layout={'fill'} priority={true} />
           </AvatarWrapper>
           <Author>{article.author}</Author>
           <ArticleDate>{article.updatedAt}</ArticleDate>

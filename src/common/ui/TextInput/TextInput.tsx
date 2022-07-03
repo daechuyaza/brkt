@@ -17,6 +17,7 @@ type Props = {
   surfix?: React.ReactNode;
   type?: InputHTMLAttributes<HTMLInputElement>['type'];
   validation?: RegisterOptions;
+  onClick?: (value: string) => void;
 };
 
 type SizeTypes = Record<string, (props: Theme) => SerializedStyles>;
