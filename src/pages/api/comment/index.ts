@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
-import type { NextApiResponse } from 'next';
+
 import type { CreateCommentDto } from '../data/dto/CreateCommentDto';
+import type { NextApiResponse } from 'next';
 
 export default async function handler(req: CreateCommentDto, res: NextApiResponse) {
   const prisma = new PrismaClient({ log: ['query'] });
