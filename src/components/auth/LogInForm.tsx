@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
-import { FormProvider, useForm } from 'react-hook-form';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { FormProvider, useForm } from 'react-hook-form';
 
 import { ROUTES } from '@common/constants/hardCoded';
 import { Button } from '@common/ui/Button/Button';
@@ -32,8 +32,10 @@ export function LogInForm() {
 
   function logIn(data: LogInFormValues) {
     const { email, password } = data;
-    console.log(email, password);
-    return;
+
+    if (!email || !password) {
+      return;
+    }
   }
 
   const emailValidation = {
@@ -55,7 +57,7 @@ export function LogInForm() {
         BRKT와 함께 하세요. 글을 쓰고, 댓글을 남기고, 지식을 나누세요. <br />
         아이디가 없으시다면?
       </Caption>
-      <Link href={`${router.pathname}?auth=signup`} as={ROUTES.SIGN_UP}>
+      <Link href={`${router.pathname}?auth=signup`} as={ROUTES.SIGN_UP} passHref>
         <SignInButton>회원가입하러 가기</SignInButton>
       </Link>
       <FormProvider {...methods}>

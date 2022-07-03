@@ -26,7 +26,7 @@ const Container = styled.div`
   flex: 1 1 0;
   flex-direction: row;
   max-width: 100vw;
-  height: 19.2rem;
+  height: 14.2rem;
 
   border-bottom-width: 1px;
   border-bottom-color: ${(props) => props.theme.colors.onSurface};
@@ -38,7 +38,7 @@ const ButtonTitle = styled.div`
   display: flex;
   align-items: center;
   padding-left: ${(props) => props.theme.spacing[8]};
-  font-size: ${(props) => props.theme.fontSize.headline1};
+  font-size: ${(props) => props.theme.fontSize.headline2};
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 700;
 
@@ -63,5 +63,5 @@ const Description = styled.div`
   width: 70%;
   color: ${(props) => props.theme.colors.secondary};
   font-family: 'Noto Sans KR', sans-serif;
-  font-size: ${(props) => props.theme.fontSize.body1};
+  font-size: ${(props) => props.theme.fontSize.body2};
 `;

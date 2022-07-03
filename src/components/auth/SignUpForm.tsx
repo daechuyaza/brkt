@@ -31,7 +31,10 @@ export function SignUpForm() {
 
   function signUp(data: SignUpFormValues) {
     const { email, password, passwordConfirm } = data;
-    console.log(email, password, passwordConfirm);
+
+    if (!email || !password || !passwordConfirm) {
+      return;
+    }
 
     return;
   }
@@ -122,11 +125,4 @@ const InputBox = styled.div`
   flex-direction: column;
   gap: 24px;
   margin-bottom: 72px;
-`;
-
-const SocialLogInBox = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
 `;

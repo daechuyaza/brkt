@@ -1,6 +1,7 @@
+import { InputHTMLAttributes } from 'react';
+
 import { css, SerializedStyles, Theme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { InputHTMLAttributes } from 'react';
 import { Path, RegisterOptions, useFormContext } from 'react-hook-form';
 
 type IFormValue = {

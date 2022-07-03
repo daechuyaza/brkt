@@ -3,10 +3,12 @@ import type { AppProps } from 'next/app';
 import { RecoilRoot } from 'recoil';
 import { QueryClientProvider } from 'react-query';
 import { ReactQueryUtils } from '@common/utils';
+
+import { Layout } from '@common/ui';
 import AuthModal from '@components/auth/AuthModal';
+
 import { global } from '../styles/global';
 import { lightTheme } from '../styles/theme';
-import Layout from './Layout';
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
   // eslint-disable-next-line global-require

@@ -1,8 +1,8 @@
-import Link from 'next/link';
 import React from 'react';
-import { useRouter } from 'next/router';
 
 import styled from '@emotion/styled';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import { DarkMode } from '@common/assets/icons/DarkMode';
 import { Logo } from '@common/assets/icons/Logo';
@@ -44,7 +44,7 @@ export function Navigator() {
 
 const Container = styled.div`
   display: flex;
-  flex: 2 1 0;
+  flex: 1 1 0;
   justify-content: space-between;
   border-bottom-width: 1px;
   border-bottom-color: ${(props) => props.theme.colors.onSurface};
