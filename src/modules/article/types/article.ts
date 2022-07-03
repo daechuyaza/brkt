@@ -1,6 +1,18 @@
 export type ArticleType = {
-  title: string;
+  authorId: number;
   author: string;
-  thumbNail: string;
+  authorThumbnail: string;
+  title: string;
+  content: string;
+  thumbnail: string;
+  id: number;
+  tags: {
+    name: string;
+    id: string;
+  }[];
+  createdAt: string;
   updatedAt: string;
+  deletedAt: string;
+  viewCound: number;
+  isPublic: boolean;
 };

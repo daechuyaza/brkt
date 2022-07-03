@@ -1,4 +1,5 @@
 import { Nullable } from '@common/utils';
+
 import { Article, Series, User } from '../model';
 
 export interface GetArticleResponseDto {

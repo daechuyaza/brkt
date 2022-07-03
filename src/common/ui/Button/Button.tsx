@@ -42,7 +42,7 @@ const Container = styled.button<{
   border: none;
   font-size: ${(props) => {
     if (props.$size === 'large') {
-      return props.theme.fontSize.subtitle;
+      return props.theme.fontSize.subtitle2;
     }
 
     return props.theme.fontSize.caption2;

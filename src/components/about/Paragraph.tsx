@@ -24,7 +24,7 @@ const Container = styled.div`
 
 const Title = styled.span`
   color: ${(props) => props.theme.colors.secondary};
-  font-size: ${(props) => props.theme.fontSize.subtitle};
+  font-size: ${(props) => props.theme.fontSize.subtitle2};
   font-weight: bold;
 `;
 
