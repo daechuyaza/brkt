@@ -55,7 +55,7 @@
     "workerDirectory": "public"
   },
   "simple-git-hooks": {
-    "pre-commit": "npm run lint-staged",
-    "commit-msg": "npm run commitlint"
+    "pre-commit": "npx run lint-staged",
+    "commit-msg": "npx run commitlint"
   }
 }
