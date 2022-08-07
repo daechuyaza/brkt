@@ -15,8 +15,6 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
   require('../../mocks');
 }
 
-console.log('hi');
-
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={ReactQueryUtils.getQueryClient()}>
