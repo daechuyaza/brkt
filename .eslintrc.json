@@ -5,8 +5,9 @@
     "node": true
   },
   "extends": ["next/core-web-vitals", "prettier"],
-  "plugins": ["import"],
   "rules": {
+    "no-console": "error",
+    "import/no-duplicates": "error",
     "import/order": [
       "error",
       {
