@@ -1,7 +1,7 @@
 import '@emotion/react';
 
-import { spacing } from '../src/styles/spacing';
 import { fontSize } from '../src/styles/font';
+import { spacing } from '../src/styles/spacing';
 
 declare module '@emotion/react' {
   export interface Theme {

@@ -17,6 +17,7 @@ type Props = {
   surfix?: React.ReactNode;
   type?: InputHTMLAttributes<HTMLInputElement>['type'];
   validation?: RegisterOptions;
+  onClick?: (value: string) => void;
 };
 
 type SizeTypes = Record<string, (props: Theme) => SerializedStyles>;
@@ -58,12 +59,12 @@ export function TextInput({
 
 const sizes: SizeTypes = {
   large: (theme: Theme) => css`
-    font-size: ${theme.fontSize.subtitle};
+    font-size: ${theme.fontSize.subtitle2};
     font-weight: bold;
 
     &::placeholder {
       color: ${theme.colors.secondary};
-      font-size: ${theme.fontSize.subtitle};
+      font-size: ${theme.fontSize.subtitle2};
     }
   `,
   medium: (theme: Theme) => css`
