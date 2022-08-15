@@ -3,5 +3,5 @@ public/
 **/out/*
 **/.next/*
 *.config.js
-**/lib/*
-**/prisma/*
+
+

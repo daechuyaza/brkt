@@ -15,6 +15,9 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
   require('../../mocks');
 }
 
+// eslint-disable-next-line no-console
+console.log('hihi');
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={ReactQueryUtils.getQueryClient()}>
