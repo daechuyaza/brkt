@@ -30,7 +30,7 @@ const MarqueeText = styled.span`
   width: 89ch;
   text-shadow: 90ch 0 black, 180ch 0 black;
   white-space: nowrap;
-  font-size: ${(props) => props.theme.fontSize.subtitle};
+  font-size: ${(props) => props.theme.fontSize.subtitle2};
   font-weight: 700;
   color: ${(props) => props.theme.colors.onSurface};
 

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
 
 import { mainWideButtonsInformation } from '@common/constants/hardCoded';
 import { Marquee } from '@common/ui';
@@ -7,13 +7,24 @@ import { MainWideButton } from '@common/ui/MainWideButton/MainWideButton';
 import { MainArticle } from '@components/article/MainArticle';
 import { ArticleType } from '@modules/article/types/article';
 
+import type { NextPage } from 'next';
+
 type Props = {
   articles: ArticleType[];
 };
 
 const Home: NextPage<Props> = ({ articles }) => {
+  const router = useRouter();
+
   const leftArticle = articles[0];
   const rightArticle = articles[1];
+
+  const handleMainArticleClick = (id: number) => {
+    router.push({
+      pathname: '/articles/[id]',
+      query: { id }
+    });
+  };
 
   return (
     <>
@@ -21,8 +32,8 @@ const Home: NextPage<Props> = ({ articles }) => {
         <Marquee />
       </MarqueeArea>
       <MainArticlesArea>
-        <MainArticle article={leftArticle} />
-        <MainArticle article={rightArticle} />
+        <MainArticle article={leftArticle} onClick={handleMainArticleClick} />
+        <MainArticle article={rightArticle} onClick={handleMainArticleClick} />
       </MainArticlesArea>
       <MainWideButtonsArea>
         {mainWideButtonsInformation.map((information, index) => (

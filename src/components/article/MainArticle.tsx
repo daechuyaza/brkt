@@ -1,10 +1,12 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
+import React from 'react';
 
 import { ArticleType } from '@modules/article/types/article';
 
 type Props = {
   article: ArticleType;
+  onClick: (id: number) => void;
 };
 
 /**
@@ -18,17 +20,17 @@ type Props = {
  * 따라서 절반 크기의 높이를 가지게 됩니다.
  */
 
-export function MainArticle({ article }: Props) {
+export function MainArticle({ article, onClick }: Props) {
   return (
-    <Container>
+    <Container onClick={() => onClick(article.id)}>
       <ThumbnailWrapper>
-        <Thumbnail src={article.thumbNail} layout={'fill'} priority={true} />
+        <Thumbnail src={article.thumbnail} layout={'fill'} priority={true} />
       </ThumbnailWrapper>
       <DescriptionWrapper>
         <Title>{article.title}</Title>
         <SubDescrptionBox>
           <AvatarWrapper>
-            <Avatar src={article.thumbNail} layout={'fill'} priority={true} />
+            <Avatar src={article.authorThumbnail} layout={'fill'} priority={true} />
           </AvatarWrapper>
           <Author>{article.author}</Author>
           <ArticleDate>{article.updatedAt}</ArticleDate>
@@ -42,6 +44,7 @@ const Container = styled.div`
   display: flex;
   flex: 1 1 0;
   flex-direction: column;
+  cursor: pointer;
 `;
 
 const ThumbnailWrapper = styled.div`
@@ -88,7 +91,7 @@ const SubDescrptionBox = styled.div`
 const Title = styled.div`
   max-width: 60%;
   margin-bottom: ${(props) => props.theme.spacing[5]};
-  font-size: ${(props) => props.theme.fontSize.subtitle};
+  font-size: ${(props) => props.theme.fontSize.subtitle2};
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 700;
   color: ${(props) => props.theme.colors.onSurface};

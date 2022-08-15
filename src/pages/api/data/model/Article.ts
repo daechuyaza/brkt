@@ -1,4 +1,5 @@
 import { Nullable } from '@common/utils';
+
 import { Series, User } from './index';
 
 export interface Article {

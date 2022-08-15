@@ -1,5 +1,6 @@
 import { NextPage } from 'next/types';
 import { useQuery } from 'react-query';
+
 import { Article } from './api/data/model';
 import ArticleRepository from './api/repository';
 
