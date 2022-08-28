@@ -50,7 +50,7 @@ const CopyWrightWrapper = styled.div`
 const CopyWright = styled.div`
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
-  font-size: ${(props) => props.theme.fontSize.caption2};
+  font-size: ${(props) => props.theme.fontSize.caption1};
   color: ${(props) => props.theme.colors.surface};
 `;
 
@@ -64,7 +64,7 @@ const AdressWrapper = styled.div`
 const Adress = styled.div`
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
-  font-size: ${(props) => props.theme.fontSize.caption2};
+  font-size: ${(props) => props.theme.fontSize.caption1};
   color: ${(props) => props.theme.colors.surface};
 `;
 
@@ -79,7 +79,7 @@ const LinkWrapper = styled.div`
 const Link = styled.div`
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
-  font-size: ${(props) => props.theme.fontSize.caption2};
+  font-size: ${(props) => props.theme.fontSize.caption1};
   color: ${(props) => props.theme.colors.surface};
 `;
 
@@ -93,13 +93,13 @@ const TermsAndPolicyWrapper = styled.div`
 const Terms = styled.div`
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
-  font-size: ${(props) => props.theme.fontSize.caption2};
+  font-size: ${(props) => props.theme.fontSize.caption1};
   color: ${(props) => props.theme.colors.surface};
 `;
 
 const Policy = styled.div`
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
-  font-size: ${(props) => props.theme.fontSize.caption2};
+  font-size: ${(props) => props.theme.fontSize.caption1};
   color: ${(props) => props.theme.colors.surface};
 `;

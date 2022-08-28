@@ -24,7 +24,7 @@ export function Layout({ children }: Props) {
 const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  grid-auto-rows: minmax(5.7rem, auto);
+  grid-auto-rows: minmax(4.3rem, auto);
   grid-template-areas:
     'header'
     'content'
