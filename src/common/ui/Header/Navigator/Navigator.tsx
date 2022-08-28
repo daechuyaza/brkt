@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Search, Moon } from 'react-feather';
+import { Search, Moon, Edit3 } from 'react-feather';
 
+import { Edit } from '@common/assets/icons/Edit';
 import { Logo } from '@common/assets/icons/Logo';
 import { ROUTES } from '@common/constants/hardCoded';
 
@@ -32,8 +33,13 @@ export function Navigator() {
           <WhiteSpace />
           <Moon fill={'#232323'} />
         </SubButtonsBox>
+        <Link href={`${router.pathname}/new-story`} as={ROUTES.NEW_STORY} passHref>
+          <EditButton>
+            <Edit3 fill={'#232323'} />
+          </EditButton>
+        </Link>
         <Link href={`${router.pathname}?auth=login`} as={ROUTES.LOG_IN} passHref>
-          <LogInButton>LOGIN</LogInButton>
+          <LinkButton>LOGIN</LinkButton>
         </Link>
       </RightWrapper>
     </Container>
@@ -58,8 +64,9 @@ const LeftWrapper = styled.div`
 `;
 
 const RightWrapper = styled.div`
+  align-items: center;
   display: flex;
-  height: '100%';
+  height: 100%;
 `;
 
 const LogoBox = styled.div`
@@ -109,8 +116,12 @@ const WhiteSpace = styled.div`
   height: 100%;
 `;
 
-const LogInButton = styled.a`
-  align-self: center;
+const EditButton = styled.a`
+  cursor: pointer;
+  margin-right: ${(props) => props.theme.spacing[5]};
+`;
+
+const LinkButton = styled.a`
   cursor: pointer;
   font-size: ${(props) => props.theme.fontSize.subtitle1};
   font-family: 'Montserrat', sans-serif;

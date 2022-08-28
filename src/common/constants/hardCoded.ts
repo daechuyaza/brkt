@@ -22,7 +22,8 @@ export const ROUTES = {
   ABOUT: '/about',
   SUBSCRIBE: '/subscribe',
   LOG_IN: '/login',
-  SIGN_UP: '/signup'
+  SIGN_UP: '/signup',
+  NEW_STORY: '/new-story'
 } as const;
 
 export const aboutParagraphs = [
