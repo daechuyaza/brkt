@@ -32,49 +32,6 @@ export const editor = css`
     text-align: right;
   }
 
-  /* .editor-container {
-    margin: 20px auto 20px auto;
-    border-radius: 2px;
-    max-width: 600px;
-    color: #000;
-    position: relative;
-    line-height: 20px;
-    font-weight: 400;
-    text-align: left;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-  }
-
-  .editor-inner {
-    background: #fff;
-    position: relative;
-  }
-
-  .editor-input {
-    min-height: 150px;
-    resize: none;
-    font-size: 15px;
-    caret-color: rgb(5, 5, 5);
-    position: relative;
-    tab-size: 1;
-    outline: 0;
-    padding: 15px 10px;
-    caret-color: #444;
-  }
-
-  .editor-placeholder {
-    color: #999;
-    overflow: hidden;
-    position: absolute;
-    text-overflow: ellipsis;
-    top: 15px;
-    left: 10px;
-    font-size: 15px;
-    user-select: none;
-    display: inline-block;
-    pointer-events: none;
-  } */
-
   .editor-text-bold {
     font-weight: bold;
   }
@@ -262,73 +219,6 @@ export const editor = css`
 
   pre::-webkit-scrollbar-thumb {
     background: #999;
-  }
-
-  .debug-timetravel-panel {
-    overflow: hidden;
-    padding: 0 0 10px 0;
-    margin: auto;
-    display: flex;
-  }
-
-  .debug-timetravel-panel-slider {
-    padding: 0;
-    flex: 8;
-  }
-
-  .debug-timetravel-panel-button {
-    padding: 0;
-    border: 0;
-    background: none;
-    flex: 1;
-    color: #fff;
-    font-size: 12px;
-  }
-
-  .debug-timetravel-panel-button:hover {
-    text-decoration: underline;
-  }
-
-  .debug-timetravel-button {
-    border: 0;
-    padding: 0;
-    font-size: 12px;
-    top: 10px;
-    right: 15px;
-    position: absolute;
-    background: none;
-    color: #fff;
-  }
-
-  .debug-timetravel-button:hover {
-    text-decoration: underline;
-  }
-
-  .emoji {
-    color: transparent;
-    background-size: 16px 16px;
-    background-position: center;
-    background-repeat: no-repeat;
-    vertical-align: middle;
-    margin: 0 -1px;
-  }
-
-  .emoji-inner {
-    padding: 0 0.15em;
-  }
-
-  .emoji-inner::selection {
-    color: transparent;
-    background-color: rgba(150, 150, 150, 0.4);
-  }
-
-  .emoji-inner::moz-selection {
-    color: transparent;
-    background-color: rgba(150, 150, 150, 0.4);
-  }
-
-  .emoji.happysmile {
-    background-image: url(./images/emoji/1F642.png);
   }
 
   .toolbar {

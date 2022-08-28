@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import {
   $createCodeNode,
@@ -6,16 +7,10 @@ import {
   getCodeLanguages
 } from '@lexical/code';
 import { $isLinkNode, TOGGLE_LINK_COMMAND } from '@lexical/link';
-import {
-  INSERT_ORDERED_LIST_COMMAND,
-  INSERT_UNORDERED_LIST_COMMAND,
-  REMOVE_LIST_COMMAND,
-  $isListNode,
-  ListNode
-} from '@lexical/list';
+import { $isListNode, ListNode } from '@lexical/list';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { $createHeadingNode, $createQuoteNode, $isHeadingNode } from '@lexical/rich-text';
-import { $isParentElementRTL, $wrapLeafNodesInElements, $isAtNodeEnd } from '@lexical/selection';
+import { $isHeadingNode } from '@lexical/rich-text';
+import { $isParentElementRTL, $isAtNodeEnd } from '@lexical/selection';
 import { $getNearestNodeOfType, mergeRegister } from '@lexical/utils';
 import {
   CAN_REDO_COMMAND,
@@ -27,11 +22,31 @@ import {
   FORMAT_ELEMENT_COMMAND,
   $getSelection,
   $isRangeSelection,
-  $createParagraphNode,
-  $getNodeByKey
+  $getNodeByKey,
+  RangeSelection
 } from 'lexical';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import {
+  Bold,
+  Italic,
+  Underline,
+  Code,
+  Link2,
+  AlignLeft,
+  AlignCenter,
+  AlignRight,
+  AlignJustify,
+  Minus,
+  RotateCcw,
+  RotateCw,
+  ChevronDown,
+  Type
+} from 'react-feather';
+
+import { H1, H2, Ol, Quote, Ul } from '@common/assets/icons/Editor';
+
+import { BlockOptionsDropdownList, Divider, FloatingLinkEditor, Select } from '../components';
 
 const LowPriority = 1;
 
@@ -48,188 +63,22 @@ const blockTypeToBlockName = {
   paragraph: 'Normal',
   quote: 'Quote',
   ul: 'Bulleted List'
-};
+} as const;
 
-function Divider() {
-  return <div className="divider" />;
-}
+export type BlockType = keyof typeof blockTypeToBlockName;
 
-function positionEditorElement(editor: any, rect: ay) {
-  if (rect === null) {
-    editor.style.opacity = '0';
-    editor.style.top = '-1000px';
-    editor.style.left = '-1000px';
-  } else {
-    editor.style.opacity = '1';
-    editor.style.top = `${rect.top + rect.height + window.pageYOffset + 10}px`;
-    editor.style.left = `${
-      rect.left + window.pageXOffset - editor.offsetWidth / 2 + rect.width / 2
-    }px`;
-  }
-}
-
-function FloatingLinkEditor({ editor }: { editor: any }) {
-  const editorRef = useRef(null);
-  const inputRef = useRef(null);
-  const mouseDownRef = useRef(false);
-  const [linkUrl, setLinkUrl] = useState('');
-  const [isEditMode, setEditMode] = useState(false);
-  const [lastSelection, setLastSelection] = useState(null);
-
-  const updateLinkEditor = useCallback(() => {
-    const selection = $getSelection();
-    if ($isRangeSelection(selection)) {
-      const node = getSelectedNode(selection);
-      const parent = node.getParent();
-      if ($isLinkNode(parent)) {
-        setLinkUrl(parent.getURL());
-      } else if ($isLinkNode(node)) {
-        setLinkUrl(node.getURL());
-      } else {
-        setLinkUrl('');
-      }
-    }
-    const editorElem = editorRef.current;
-    const nativeSelection = window.getSelection();
-    const activeElement = document.activeElement;
-
-    if (editorElem === null) {
-      return;
-    }
-
-    const rootElement = editor.getRootElement();
-    if (
-      selection !== null &&
-      !nativeSelection.isCollapsed &&
-      rootElement !== null &&
-      rootElement.contains(nativeSelection.anchorNode)
-    ) {
-      const domRange = nativeSelection.getRangeAt(0);
-      let rect;
-      if (nativeSelection.anchorNode === rootElement) {
-        let inner = rootElement;
-        while (inner.firstElementChild != null) {
-          inner = inner.firstElementChild;
-        }
-        rect = inner.getBoundingClientRect();
-      } else {
-        rect = domRange.getBoundingClientRect();
-      }
-
-      if (!mouseDownRef.current) {
-        positionEditorElement(editorElem, rect);
-      }
-      setLastSelection(selection);
-    } else if (!activeElement || activeElement.className !== 'link-input') {
-      positionEditorElement(editorElem, null);
-      setLastSelection(null);
-      setEditMode(false);
-      setLinkUrl('');
-    }
-
-    return true;
-  }, [editor]);
-
-  useEffect(() => {
-    return mergeRegister(
-      editor.registerUpdateListener(({ editorState }: { editorState: any }) => {
-        editorState.read(() => {
-          updateLinkEditor();
-        });
-      }),
-
-      editor.registerCommand(
-        SELECTION_CHANGE_COMMAND,
-        () => {
-          updateLinkEditor();
-          return true;
-        },
-        LowPriority
-      )
-    );
-  }, [editor, updateLinkEditor]);
-
-  useEffect(() => {
-    editor.getEditorState().read(() => {
-      updateLinkEditor();
-    });
-  }, [editor, updateLinkEditor]);
-
-  useEffect(() => {
-    if (isEditMode && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [isEditMode]);
-
-  return (
-    <div ref={editorRef} className="link-editor">
-      {isEditMode ? (
-        <input
-          ref={inputRef}
-          className="link-input"
-          value={linkUrl}
-          onChange={(event) => {
-            setLinkUrl(event.target.value);
-          }}
-          onKeyDown={(event) => {
-            if (event.key === 'Enter') {
-              event.preventDefault();
-              if (lastSelection !== null) {
-                if (linkUrl !== '') {
-                  editor.dispatchCommand(TOGGLE_LINK_COMMAND, linkUrl);
-                }
-                setEditMode(false);
-              }
-            } else if (event.key === 'Escape') {
-              event.preventDefault();
-              setEditMode(false);
-            }
-          }}
-        />
-      ) : (
-        <>
-          <div className="link-input">
-            <a href={linkUrl} target="_blank" rel="noopener noreferrer">
-              {linkUrl}
-            </a>
-            <div
-              className="link-edit"
-              role="button"
-              tabIndex={0}
-              onMouseDown={(event) => event.preventDefault()}
-              onClick={() => {
-                setEditMode(true);
-              }}
-            />
-          </div>
-        </>
-      )}
-    </div>
-  );
-}
-
-function Select({ onChange, className, options, value }) {
-  return (
-    <select className={className} onChange={onChange} value={value}>
-      <option hidden={true} value="" />
-      {options.map((option) => (
-        <option key={option} value={option}>
-          {option}
-        </option>
-      ))}
-    </select>
-  );
-}
-
-function getSelectedNode(selection) {
+function getSelectedNode(selection: RangeSelection) {
   const anchor = selection.anchor;
   const focus = selection.focus;
   const anchorNode = selection.anchor.getNode();
   const focusNode = selection.focus.getNode();
+
   if (anchorNode === focusNode) {
     return anchorNode;
   }
+
   const isBackward = selection.isBackward();
+
   if (isBackward) {
     return $isAtNodeEnd(focus) ? anchorNode : focusNode;
   } else {
@@ -237,269 +86,13 @@ function getSelectedNode(selection) {
   }
 }
 
-function BlockOptionsDropdownList({
-  editor,
-  blockType,
-  toolbarRef,
-  setShowBlockOptionsDropDown
-}: {
-  editor: any;
-  blockType: any;
-  toolbarRef: any;
-  setShowBlockOptionsDropDown: any;
-}) {
-  const dropDownRef = useRef(null);
-
-  useEffect(() => {
-    const toolbar = toolbarRef.current;
-    const dropDown = dropDownRef.current;
-
-    if (toolbar !== null && dropDown !== null) {
-      const { top, left } = toolbar.getBoundingClientRect();
-      dropDown.style.top = `${top + 40}px`;
-      dropDown.style.left = `${left}px`;
-    }
-  }, [dropDownRef, toolbarRef]);
-
-  useEffect(() => {
-    const dropDown = dropDownRef.current;
-    const toolbar = toolbarRef.current;
-
-    if (dropDown !== null && toolbar !== null) {
-      const handle = (event: any) => {
-        const target = event.target;
-
-        if (!dropDown.contains(target) && !toolbar.contains(target)) {
-          setShowBlockOptionsDropDown(false);
-        }
-      };
-      document.addEventListener('click', handle);
-
-      return () => {
-        document.removeEventListener('click', handle);
-      };
-    }
-  }, [dropDownRef, setShowBlockOptionsDropDown, toolbarRef]);
-
-  const formatParagraph = () => {
-    if (blockType !== 'paragraph') {
-      editor.update(() => {
-        const selection = $getSelection();
-
-        if ($isRangeSelection(selection)) {
-          $wrapLeafNodesInElements(selection, () => $createParagraphNode());
-        }
-      });
-    }
-    setShowBlockOptionsDropDown(false);
-  };
-
-  const formatLargeHeading = () => {
-    if (blockType !== 'h1') {
-      editor.update(() => {
-        const selection = $getSelection();
-
-        if ($isRangeSelection(selection)) {
-          $wrapLeafNodesInElements(selection, () => $createHeadingNode('h1'));
-        }
-      });
-    }
-    setShowBlockOptionsDropDown(false);
-  };
-
-  const formatSmallHeading = () => {
-    if (blockType !== 'h2') {
-      editor.update(() => {
-        const selection = $getSelection();
-
-        if ($isRangeSelection(selection)) {
-          $wrapLeafNodesInElements(selection, () => $createHeadingNode('h2'));
-        }
-      });
-    }
-    setShowBlockOptionsDropDown(false);
-  };
-
-  const formatBulletList = () => {
-    if (blockType !== 'ul') {
-      editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND);
-    } else {
-      editor.dispatchCommand(REMOVE_LIST_COMMAND);
-    }
-    setShowBlockOptionsDropDown(false);
-  };
-
-  const formatNumberedList = () => {
-    if (blockType !== 'ol') {
-      editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND);
-    } else {
-      editor.dispatchCommand(REMOVE_LIST_COMMAND);
-    }
-    setShowBlockOptionsDropDown(false);
-  };
-
-  const formatQuote = () => {
-    if (blockType !== 'quote') {
-      editor.update(() => {
-        const selection = $getSelection();
-
-        if ($isRangeSelection(selection)) {
-          $wrapLeafNodesInElements(selection, () => $createQuoteNode());
-        }
-      });
-    }
-    setShowBlockOptionsDropDown(false);
-  };
-
-  const formatCode = () => {
-    if (blockType !== 'code') {
-      editor.update(() => {
-        const selection = $getSelection();
-
-        if ($isRangeSelection(selection)) {
-          $wrapLeafNodesInElements(selection, () => $createCodeNode());
-        }
-      });
-    }
-    setShowBlockOptionsDropDown(false);
-  };
-
-  return (
-    <Dropdown ref={dropDownRef}>
-      <Item onClick={formatParagraph}>
-        <Paragraph />
-        <Text>Normal</Text>
-        {blockType === 'paragraph' && <Active />}
-      </Item>
-      <Item onClick={formatLargeHeading}>
-        <H1 />
-        <Text>Large Heading</Text>
-        {blockType === 'h1' && <Active />}
-      </Item>
-      <Item onClick={formatSmallHeading}>
-        <H2 />
-        <Text>Small Heading</Text>
-        {blockType === 'h2' && <Active />}
-      </Item>
-      <Item onClick={formatBulletList}>
-        <Ol />
-        <Text>Bullet List</Text>
-        {blockType === 'ul' && <Active />}
-      </Item>
-      <Item onClick={formatNumberedList}>
-        <Ul />
-        <Text>Numbered List</Text>
-        {blockType === 'ol' && <Active />}
-      </Item>
-      <Item onClick={formatQuote}>
-        <Quote />
-        <Text>Quote</Text>
-        {blockType === 'quote' && <Active />}
-      </Item>
-      <Item onClick={formatCode}>
-        <Code />
-        <Text>Code Block</Text>
-        {blockType === 'code' && <Active />}
-      </Item>
-    </Dropdown>
-  );
-}
-
-const Dropdown = styled.div`
-  z-index: 5;
-  display: block;
-  position: absolute;
-  box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
-  border-radius: 8px;
-  min-width: 100px;
-  min-height: 40px;
-  background-color: #fff;
-`;
-
-const Item = styled.button`
-  margin: 0 8px 0 8px;
-  padding: 8px;
-  color: #050505;
-  cursor: pointer;
-  line-height: 16px;
-  font-size: 15px;
-  display: flex;
-  align-content: center;
-  flex-direction: row;
-  flex-shrink: 0;
-  justify-content: space-between;
-  background-color: #fff;
-  border-radius: 8px;
-  border: 0;
-  min-width: 268px;
-
-  &:first-child {
-    margin-top: 8px;
-  }
-
-  &:last-child {
-    margin-bottom: 8px;
-  }
-
-  &:hover {
-    background-color: #eee;
-  }
-`;
-
-const Active = styled.span`
-  display: flex;
-  width: 20px;
-  height: 20px;
-  background-size: contain;
-`;
-
-const Text = styled.span`
-  display: flex;
-  line-height: 20px;
-  flex-grow: 1;
-  width: 200px;
-`;
-
-const Icon = styled.span`
-  display: flex;
-  width: 20px;
-  height: 20px;
-  user-select: none;
-  margin-right: 12px;
-  line-height: 16px;
-  background-size: contain;
-`;
-
-// const Paragraph = styled(Icon)`
-//   background-image: url(images/icons/text-paragraph.svg);
-// `;
-// const H1 = styled(Icon)`
-//   background-image: url(images/icons/type-h1.svg);
-// `;
-// const H2 = styled(Icon)`
-//   background-image: url(images/icons/type-h2.svg);
-// `;
-// const Ul = styled(Icon)`
-//   background-image: url(images/icons/list-ul.svg);
-// `;
-// const Ol = styled(Icon)`
-//   background-image: url(images/icons/list-ol.svg);
-// `;
-// const Quote = styled(Icon)`
-//   background-image: url(images/icons/chat-square-quote.svg);
-// `;
-// const Code = styled(Icon)`
-//   background-image: url(images/icons/code.svg);
-// `;
-
 export default function ToolbarPlugin() {
   const [editor] = useLexicalComposerContext();
-  const toolbarRef = useRef(null);
+
   const [canUndo, setCanUndo] = useState(false);
   const [canRedo, setCanRedo] = useState(false);
-  const [blockType, setBlockType] = useState('paragraph');
-  const [selectedElementKey, setSelectedElementKey] = useState(null);
+  const [blockType, setBlockType] = useState<BlockType>('paragraph');
+  const [selectedElementKey, setSelectedElementKey] = useState<string | null>(null);
   const [showBlockOptionsDropDown, setShowBlockOptionsDropDown] = useState(false);
   const [codeLanguage, setCodeLanguage] = useState('');
   const [isRTL, setIsRTL] = useState(false);
@@ -510,29 +103,37 @@ export default function ToolbarPlugin() {
   const [isStrikethrough, setIsStrikethrough] = useState(false);
   const [isCode, setIsCode] = useState(false);
 
+  const toolbarRef = useRef<HTMLDivElement | null>(null);
+
   const updateToolbar = useCallback(() => {
     const selection = $getSelection();
+
     if ($isRangeSelection(selection)) {
       const anchorNode = selection.anchor.getNode();
       const element =
         anchorNode.getKey() === 'root' ? anchorNode : anchorNode.getTopLevelElementOrThrow();
       const elementKey = element.getKey();
       const elementDOM = editor.getElementByKey(elementKey);
+
       if (elementDOM !== null) {
         setSelectedElementKey(elementKey);
+
         if ($isListNode(element)) {
           const parentList = $getNearestNodeOfType(anchorNode, ListNode);
           const type = parentList ? parentList.getTag() : element.getTag();
+
           setBlockType(type);
         } else {
           const type = $isHeadingNode(element) ? element.getTag() : element.getType();
-          setBlockType(type);
+
+          setBlockType(type as BlockType);
+
           if ($isCodeNode(element)) {
             setCodeLanguage(element.getLanguage() || getDefaultCodeLanguage());
           }
         }
       }
-      // Update text format
+
       setIsBold(selection.hasFormat('bold'));
       setIsItalic(selection.hasFormat('italic'));
       setIsUnderline(selection.hasFormat('underline'));
@@ -540,9 +141,9 @@ export default function ToolbarPlugin() {
       setIsCode(selection.hasFormat('code'));
       setIsRTL($isParentElementRTL(selection));
 
-      // Update links
       const node = getSelectedNode(selection);
       const parent = node.getParent();
+
       if ($isLinkNode(parent) || $isLinkNode(node)) {
         setIsLink(true);
       } else {
@@ -560,7 +161,7 @@ export default function ToolbarPlugin() {
       }),
       editor.registerCommand(
         SELECTION_CHANGE_COMMAND,
-        (_payload, newEditor) => {
+        (_payload) => {
           updateToolbar();
           return false;
         },
@@ -586,8 +187,9 @@ export default function ToolbarPlugin() {
   }, [editor, updateToolbar]);
 
   const codeLanguges = useMemo(() => getCodeLanguages(), []);
+
   const onCodeLanguageSelect = useCallback(
-    (e: any) => {
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
       editor.update(() => {
         if (selectedElementKey !== null) {
           const node = $getNodeByKey(selectedElementKey);
@@ -608,157 +210,239 @@ export default function ToolbarPlugin() {
     }
   }, [editor, isLink]);
 
+  let blockTypeIcon;
+
+  switch (blockType) {
+    case 'paragraph': {
+      blockTypeIcon = <Type size={18} />;
+      break;
+    }
+    case 'code': {
+      blockTypeIcon = <Code size={18} />;
+      break;
+    }
+    case 'h1': {
+      blockTypeIcon = <H1 width={18} height={18} />;
+      break;
+    }
+    case 'h2': {
+      blockTypeIcon = <H2 width={18} height={18} />;
+    }
+    case 'quote': {
+      blockTypeIcon = <Quote width={18} height={18} />;
+      break;
+    }
+    case 'ul': {
+      blockTypeIcon = <Ul width={18} height={18} />;
+      break;
+    }
+    case 'ol': {
+      blockTypeIcon = <Ol width={18} height={18} />;
+    }
+  }
+
+  const handleBlockOptionDropdownClick = (value: boolean) => {
+    setShowBlockOptionsDropDown(value);
+  };
+
   return (
-    <div className="toolbar" ref={toolbarRef}>
-      <button
+    <EditorToolbar ref={toolbarRef}>
+      <SpacedToolbarItem
         disabled={!canUndo}
-        onClick={() => {
-          editor.dispatchCommand(UNDO_COMMAND);
-        }}
-        className="toolbar-item spaced"
+        onClick={() => editor.dispatchCommand(UNDO_COMMAND, undefined)}
         aria-label="Undo"
       >
-        <i className="format undo" />
-      </button>
-      <button
+        <RotateCcw />
+      </SpacedToolbarItem>
+      <ToolbarItem
         disabled={!canRedo}
-        onClick={() => {
-          editor.dispatchCommand(REDO_COMMAND);
-        }}
-        className="toolbar-item"
+        onClick={() => editor.dispatchCommand(REDO_COMMAND, undefined)}
         aria-label="Redo"
       >
-        <i className="format redo" />
-      </button>
+        <RotateCw />
+      </ToolbarItem>
       <Divider />
+
       {supportedBlockTypes.has(blockType) && (
         <>
-          <button
-            className="toolbar-item block-controls"
+          <ToolbarItem
             onClick={() => setShowBlockOptionsDropDown(!showBlockOptionsDropDown)}
             aria-label="Formatting Options"
           >
-            <span className={'icon block-type ' + blockType} />
-            <span className="text">{blockTypeToBlockName[blockType] as any}</span>
-            <i className="chevron-down" />
-          </button>
+            <BlockTypeIcon>{blockTypeIcon}</BlockTypeIcon>
+            <BlockTypeText>{blockTypeToBlockName[blockType]}</BlockTypeText>
+            <ChevronDown size={18} />
+          </ToolbarItem>
           {showBlockOptionsDropDown &&
             createPortal(
               <BlockOptionsDropdownList
                 editor={editor}
                 blockType={blockType}
                 toolbarRef={toolbarRef}
-                setShowBlockOptionsDropDown={setShowBlockOptionsDropDown}
+                onDropdownChange={handleBlockOptionDropdownClick}
               />,
               document.body
             )}
           <Divider />
         </>
       )}
+
       {blockType === 'code' ? (
         <>
-          <Select
-            className="toolbar-item code-language"
-            onChange={onCodeLanguageSelect}
-            options={codeLanguges}
-            value={codeLanguage}
-          />
-          <i className="chevron-down inside" />
+          <Select onChange={onCodeLanguageSelect} options={codeLanguges} value={codeLanguage} />
+          <ChevronDown />
         </>
       ) : (
         <>
-          <button
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
-            }}
-            className={'toolbar-item spaced ' + (isBold ? 'active' : '')}
+          <SpacedToolbarItem
+            onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold')}
+            isActive={isBold}
             aria-label="Format Bold"
           >
-            <i className="format bold" />
-          </button>
-          <button
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic');
-            }}
-            className={'toolbar-item spaced ' + (isItalic ? 'active' : '')}
+            <Bold />
+          </SpacedToolbarItem>
+          <SpacedToolbarItem
+            onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic')}
+            isActive={isItalic}
             aria-label="Format Italics"
           >
-            <i className="format italic" />
-          </button>
-          <button
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline');
-            }}
-            className={'toolbar-item spaced ' + (isUnderline ? 'active' : '')}
+            <Italic />
+          </SpacedToolbarItem>
+          <SpacedToolbarItem
+            onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline')}
+            isActive={isUnderline}
             aria-label="Format Underline"
           >
-            <i className="format underline" />
-          </button>
-          <button
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'strikethrough');
-            }}
-            className={'toolbar-item spaced ' + (isStrikethrough ? 'active' : '')}
+            <Underline />
+          </SpacedToolbarItem>
+          <SpacedToolbarItem
+            onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'strikethrough')}
+            isActive={isStrikethrough}
             aria-label="Format Strikethrough"
           >
-            <i className="format strikethrough" />
-          </button>
-          <button
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'code');
-            }}
-            className={'toolbar-item spaced ' + (isCode ? 'active' : '')}
+            <Minus />
+          </SpacedToolbarItem>
+          <SpacedToolbarItem
+            onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'code')}
+            isActive={isCode}
             aria-label="Insert Code"
           >
-            <i className="format code" />
-          </button>
-          <button
-            onClick={insertLink}
-            className={'toolbar-item spaced ' + (isLink ? 'active' : '')}
-            aria-label="Insert Link"
-          >
-            <i className="format link" />
-          </button>
+            <Code />
+          </SpacedToolbarItem>
+          <SpacedToolbarItem onClick={insertLink} isActive={isLink} aria-label="Insert Link">
+            <Link2 />
+          </SpacedToolbarItem>
           {isLink && createPortal(<FloatingLinkEditor editor={editor} />, document.body)}
           <Divider />
-          <button
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'left');
-            }}
-            className="toolbar-item spaced"
+          <SpacedToolbarItem
+            onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'left')}
             aria-label="Left Align"
           >
-            <i className="format left-align" />
-          </button>
-          <button
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'center');
-            }}
-            className="toolbar-item spaced"
+            <AlignLeft />
+          </SpacedToolbarItem>
+          <SpacedToolbarItem
+            onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'center')}
             aria-label="Center Align"
           >
-            <i className="format center-align" />
-          </button>
-          <button
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'right');
-            }}
-            className="toolbar-item spaced"
+            <AlignCenter />
+          </SpacedToolbarItem>
+          <SpacedToolbarItem
+            onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'right')}
             aria-label="Right Align"
           >
-            <i className="format right-align" />
-          </button>
-          <button
-            onClick={() => {
-              editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'justify');
-            }}
-            className="toolbar-item"
+            <AlignRight />
+          </SpacedToolbarItem>
+          <ToolbarItem
+            onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'justify')}
             aria-label="Justify Align"
           >
-            <i className="format justify-align" />
-          </button>{' '}
+            <AlignJustify />
+          </ToolbarItem>
         </>
       )}
-    </div>
+    </EditorToolbar>
   );
 }
+
+const EditorToolbar = styled.div`
+  display: flex;
+  margin-bottom: 1px;
+  background: #fff;
+  padding: 4px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  vertical-align: middle;
+`;
+
+const activeStyle = css`
+  background-color: rgba(223, 232, 250, 0.3);
+
+  i {
+    opacity: 1;
+  }
+`;
+
+const ToolbarItem = styled.button`
+  align-items: center;
+  border: 0;
+  display: flex;
+  background: none;
+  border-radius: 10px;
+  padding: 8px;
+  cursor: pointer;
+  vertical-align: middle;
+
+  &:disabled {
+    cursor: not-allowed;
+
+    i.format {
+      opacity: 0.2;
+    }
+  }
+
+  i.format {
+    background-size: contain;
+    display: inline-block;
+    height: 18px;
+    width: 18px;
+    margin-top: 2px;
+    vertical-align: -0.25em;
+    display: flex;
+    opacity: 0.6;
+  }
+
+  &:hover:not([disabled]) {
+    background-color: #eee;
+  }
+`;
+
+const SpacedToolbarItem = styled(ToolbarItem)<{
+  isActive?: boolean;
+}>`
+  margin-right: 2px;
+
+  ${({ isActive }) => isActive && activeStyle};
+`;
+
+const BlockTypeIcon = styled.span`
+  background-size: contain;
+  display: inline-block;
+  vertical-align: -0.25em;
+  display: flex;
+  opacity: 0.6;
+  margin-right: 4px;
+`;
+
+const BlockTypeText = styled.span`
+  display: flex;
+  line-height: 20px;
+  width: 200px;
+  vertical-align: middle;
+  font-size: 14px;
+  color: #777;
+  text-overflow: ellipsis;
+  width: 70px;
+  overflow: hidden;
+  height: 20px;
+  text-align: left;
+`;
