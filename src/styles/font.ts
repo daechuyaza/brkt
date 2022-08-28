@@ -1,11 +1,11 @@
 export const fontSize = {
-  headline1: '9.6rem',
-  headline2: '6.0rem',
-  headline3: '4.8rem',
-  subtitle1: '3.6rem',
-  subtitle2: '2.4rem',
-  body1: '2.2rem',
-  body2: '1.8rem',
-  caption1: '1.6rem',
-  caption2: '1.4rem'
+  headline1: '7.0rem',
+  headline2: '3.2rem',
+  headline3: '2.2rem',
+  subtitle1: '2.0rem',
+  subtitle2: '1.8rem',
+  body1: '1.6rem',
+  body2: '1.4rem',
+  caption1: '1.2rem',
+  caption2: '1.0rem'
 } as const;

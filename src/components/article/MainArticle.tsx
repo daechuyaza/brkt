@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
-import React from 'react';
 
 import { ArticleType } from '@modules/article/types/article';
 
@@ -50,7 +49,8 @@ const Container = styled.div`
 const ThumbnailWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 55vh;
+  height: 67.5rem;
+  min-height: 50.6rem;
 `;
 
 const Thumbnail = styled(Image)`
@@ -59,8 +59,8 @@ const Thumbnail = styled(Image)`
 
 const AvatarWrapper = styled.div`
   position: relative;
-  width: 3.6rem;
-  height: 3.6rem;
+  width: 3.2rem;
+  height: 3.2rem;
   border-radius: 25px;
 `;
 
@@ -70,6 +70,8 @@ const Avatar = styled(Image)`
 `;
 
 const DescriptionWrapper = styled.div`
+  position: absolute;
+  bottom: 10%;
   display: flex;
   flex: 1 1 0;
   flex-direction: column;
@@ -78,6 +80,7 @@ const DescriptionWrapper = styled.div`
   padding-left: ${(props) => props.theme.spacing[8]};
   padding-right: ${(props) => props.theme.spacing[8]};
   padding-bottom: ${(props) => props.theme.spacing[5]};
+  color: ${(props) => props.theme.colors.surface};
 `;
 
 const SubDescrptionBox = styled.div`
@@ -85,28 +88,28 @@ const SubDescrptionBox = styled.div`
   flex: 1 1 0;
   justify-content: space-between;
   align-items: center;
-  width: 23rem;
+  width: 22rem;
 `;
 
 const Title = styled.div`
   max-width: 60%;
   margin-bottom: ${(props) => props.theme.spacing[5]};
-  font-size: ${(props) => props.theme.fontSize.subtitle2};
+  font-size: ${(props) => props.theme.fontSize.headline2};
   font-family: 'Noto Sans KR', sans-serif;
-  font-weight: 700;
-  color: ${(props) => props.theme.colors.onSurface};
+  font-weight: 900;
+  color: ${(props) => props.theme.colors.surface};
 `;
 
 const Author = styled.div`
-  font-size: ${(props) => props.theme.fontSize.body2};
+  font-size: ${(props) => props.theme.fontSize.subtitle2};
   font-family: 'Noto Sans KR', sans-serif;
-  font-weight: 400;
+  /* font-weight: 400; */
   color: ${(props) => props.theme.colors.secondary};
 `;
 
 const ArticleDate = styled.div`
-  font-size: ${(props) => props.theme.fontSize.body2};
+  font-size: ${(props) => props.theme.fontSize.subtitle2};
   font-family: 'Noto Sans KR', sans-serif;
-  font-weight: 300;
+  /* font-weight: 400; */
   color: ${(props) => props.theme.colors.secondary};
 `;

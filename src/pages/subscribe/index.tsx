@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { Button } from '@common/ui/Button/Button';
@@ -24,8 +23,6 @@ function Subscribe() {
 
   function subscribe(data: FormValue) {
     const { email } = data;
-
-    console.log(email);
   }
 
   const emailValidation = {

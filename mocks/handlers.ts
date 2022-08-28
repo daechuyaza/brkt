@@ -13,10 +13,12 @@ export const handlers = [
         {
           authorId: 1,
           author: '티나리',
-          authorThumbnail: 'https://picsum.photos/1100',
+          authorThumbnail:
+            'https://images.unsplash.com/photo-1553272725-086100aecf5e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1065&q=80',
           title: 'CircuitBreaker를 이용한 외부 API 장애 관리',
           content: content,
-          thumbnail: 'https://picsum.photos/1000',
+          thumbnail:
+            'https://images.unsplash.com/photo-1553272725-086100aecf5e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1065&q=80',
           id: 1,
           tags: [
             {
@@ -44,7 +46,8 @@ export const handlers = [
           authorThumbnail: 'https://picsum.photos/1200',
           title: '깔끔하게 깃 관리하기 Rebase와 Merge',
           content: content,
-          thumbnail: 'https://picsum.photos/1000',
+          thumbnail:
+            'https://images.unsplash.com/photo-1520085601670-ee14aa5fa3e8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
           id: 2,
           tags: [],
           createdAt: new Date().toISOString().substring(0, 10),

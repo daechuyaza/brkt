@@ -51,7 +51,7 @@ const Home: NextPage<Props> = ({ articles }) => {
 const MarqueeArea = styled.div`
   display: flex;
   flex-direction: column;
-  height: 5.7rem;
+  height: 4.3rem;
 `;
 
 const MainArticlesArea = styled.div`
