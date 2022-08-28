@@ -27,7 +27,7 @@ const MarqueeText = styled.span`
   display: inline-block;
   align-self: center;
 
-  width: 89ch;
+  width: 90ch;
   text-shadow: 90ch 0 black, 180ch 0 black;
   white-space: nowrap;
   font-size: ${(props) => props.theme.fontSize.subtitle1};
