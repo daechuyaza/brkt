@@ -33,12 +33,14 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       <RecoilRoot>
         <Global styles={global} />
         <ThemeProvider theme={lightTheme}>
-          {getLayout(
-            <>
-              <Component {...pageProps} />
-              <AuthModal />
-            </>
-          )}
+          <Layout>
+            {getLayout(
+              <>
+                <Component {...pageProps} />
+                <AuthModal />
+              </>
+            )}
+          </Layout>
           <div id="root-modal" />
         </ThemeProvider>
       </RecoilRoot>
