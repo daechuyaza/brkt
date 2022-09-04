@@ -49,7 +49,7 @@ const Container = styled.div`
 const ThumbnailWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 67.5rem;
+  height: 63.5rem;
   min-height: 50.6rem;
 `;
 
@@ -71,7 +71,7 @@ const Avatar = styled(Image)`
 
 const DescriptionWrapper = styled.div`
   position: absolute;
-  bottom: 10%;
+  bottom: 15%;
   display: flex;
   flex: 1 1 0;
   flex-direction: column;
@@ -97,6 +97,7 @@ const Title = styled.div`
   font-size: ${(props) => props.theme.fontSize.headline2};
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 900;
+  line-height: 4.3rem;
   color: ${(props) => props.theme.colors.surface};
 `;
 
