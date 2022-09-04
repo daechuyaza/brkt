@@ -9,25 +9,36 @@ import AuthModal from '@components/auth/AuthModal';
 import { global } from '../styles/global';
 import { lightTheme } from '../styles/theme';
 
+import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
+import type { ReactElement, ReactNode } from 'react';
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
   require('../../mocks');
 }
 
-// eslint-disable-next-line no-console
-console.log('hihi');
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
 
-function MyApp({ Component, pageProps }: AppProps) {
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ?? ((page) => page);
+
   return (
     <QueryClientProvider client={ReactQueryUtils.getQueryClient()}>
       <RecoilRoot>
         <Global styles={global} />
         <ThemeProvider theme={lightTheme}>
-          <Layout>
-            <Component {...pageProps} />
-            <AuthModal />
-          </Layout>
+          {getLayout(
+            <>
+              <Component {...pageProps} />
+              <AuthModal />
+            </>
+          )}
           <div id="root-modal" />
         </ThemeProvider>
       </RecoilRoot>

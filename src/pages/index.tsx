@@ -1,11 +1,14 @@
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
+import { ReactElement } from 'react';
 
 import { mainWideButtonsInformation } from '@common/constants/hardCoded';
-import { Marquee } from '@common/ui';
+import { Layout, Marquee } from '@common/ui';
 import { MainWideButton } from '@common/ui/MainWideButton/MainWideButton';
 import { MainArticle } from '@components/article/MainArticle';
 import { ArticleType } from '@modules/article/types/article';
+
+import { NextPageWithLayout } from './_app';
 
 import type { NextPage } from 'next';
 
@@ -13,7 +16,7 @@ type Props = {
   articles: ArticleType[];
 };
 
-const Home: NextPage<Props> = ({ articles }) => {
+const Home: NextPageWithLayout<Props> = ({ articles }) => {
   const router = useRouter();
 
   const leftArticle = articles[0];
@@ -74,5 +77,9 @@ export async function getStaticProps() {
     }
   };
 }
+
+Home.getLayout = function getLayout(page: ReactElement) {
+  return <Layout>{page}</Layout>;
+};
 
 export default Home;
