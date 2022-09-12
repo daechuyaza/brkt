@@ -9,6 +9,11 @@ import { ROUTES } from '@common/constants/hardCoded';
 export function Navigator() {
   const router = useRouter();
 
+  /**
+   * TODO
+   * 상의 후 네비게이터 버튼 삭제
+   */
+
   return (
     <Container>
       <LeftWrapper>
