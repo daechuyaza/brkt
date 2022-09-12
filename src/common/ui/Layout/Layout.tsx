@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 
+import { Marquee } from '@common/ui';
 import { Footer } from '@common/ui/Footer/Footer';
 import { Header } from '@common/ui/Header/Header';
 
@@ -13,6 +14,9 @@ export function Layout({ children }: Props) {
       <HeaderArea>
         <Header />
       </HeaderArea>
+      <MarqueeArea>
+        <Marquee />
+      </MarqueeArea>
       <ContentArea>{children}</ContentArea>
       <FooterArea>
         <Footer />
@@ -27,12 +31,23 @@ const Container = styled.div`
   grid-auto-rows: minmax(4.3rem, auto);
   grid-template-areas:
     'header'
+    'marquee'
     'content'
     'footer';
 `;
 
 const HeaderArea = styled.div`
   grid-area: header;
+`;
+
+const MarqueeArea = styled.div`
+  grid-area: marquee;
+  display: flex;
+  flex-direction: column;
+`;
+
+const MainArticlesArea = styled.div`
+  display: flex;
 `;
 
 const ContentArea = styled.div`
