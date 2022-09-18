@@ -7,9 +7,9 @@
  */
 const nextConfig = {
   /**
-   * TODO
+   * NOTE
    * scroll restoration 로직
-   * 직접 구현할지?
+   * https://github.com/vercel/next.js/commit/38bd1a024cb25923d8ea15f269a7294d073684d8
    */
   experimental: {
     scrollRestoration: true
