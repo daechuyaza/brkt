@@ -20,8 +20,14 @@ const Home: NextPageWithLayout<Props> = ({ articles }) => {
 
   const handleMainArticleClick = (id: number) => {
     router.push({
-      pathname: '/articles/[id]',
+      pathname: '/article/[id]',
       query: { id }
+    });
+  };
+
+  const handleMainWideButtonClick = (pathname: string) => {
+    router.push({
+      pathname: `/${pathname}`
     });
   };
 
@@ -37,6 +43,7 @@ const Home: NextPageWithLayout<Props> = ({ articles }) => {
             key={index}
             title={information.title}
             description={information.description}
+            onClick={() => handleMainWideButtonClick(information.pathName)}
           />
         ))}
       </MainWideButtonsArea>

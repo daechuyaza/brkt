@@ -1,19 +1,23 @@
 export const mainWideButtonsInformation = [
   {
     title: 'Article',
-    description: 'BRKT가 당신에게 추천하는 개발 관련 articles를 읽어 보세요'
+    description: 'BRKT가 당신에게 추천하는 개발 관련 articles를 읽어 보세요',
+    pathName: 'articles'
   },
   {
     title: 'My Writings',
-    description: '여러분의 글을 확인해 보세요'
+    description: '여러분의 글을 확인해 보세요',
+    pathName: 'my'
   },
   {
     title: 'About BRKT',
-    description: 'BRKT에 대해 알아보세요'
+    description: 'BRKT에 대해 알아보세요',
+    pathName: 'about'
   },
   {
     title: 'Contact',
-    description: ''
+    description: '',
+    pathName: 'contact'
   }
 ] as const;
 

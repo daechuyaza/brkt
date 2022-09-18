@@ -6,11 +6,12 @@ import { ArrowRight } from '@common/assets/icons/ArrowRight';
 type Props = {
   title: string;
   description: string;
+  onClick: () => void;
 };
 
-export function MainWideButton({ title, description }: Props) {
+export function MainWideButton({ title, description, onClick }: Props) {
   return (
-    <Container>
+    <Container onClick={onClick}>
       <ButtonTitle>{title}</ButtonTitle>
       <DescriptionWrapper>
         <Description>{description}</Description>
