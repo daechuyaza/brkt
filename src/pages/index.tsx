@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { mainWideButtonsInformation } from '@common/constants/hardCoded';
@@ -39,12 +40,15 @@ const Home: NextPageWithLayout<Props> = ({ articles }) => {
       </MainArticlesArea>
       <MainWideButtonsArea>
         {mainWideButtonsInformation.map((information, index) => (
-          <MainWideButton
-            key={index}
-            title={information.title}
-            description={information.description}
-            onClick={() => handleMainWideButtonClick(information.pathName)}
-          />
+          <Link key={index} href="/articles/trending" passHref>
+            <a>
+              <MainWideButton
+                key={index}
+                title={information.title}
+                description={information.description}
+              />
+            </a>
+          </Link>
         ))}
       </MainWideButtonsArea>
     </>

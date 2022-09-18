@@ -1,17 +1,15 @@
 import styled from '@emotion/styled';
-import React from 'react';
 
 import { ArrowRight } from '@common/assets/icons/ArrowRight';
 
 type Props = {
   title: string;
   description: string;
-  onClick: () => void;
 };
 
-export function MainWideButton({ title, description, onClick }: Props) {
+export function MainWideButton({ title, description }: Props) {
   return (
-    <Container onClick={onClick}>
+    <Container>
       <ButtonTitle>{title}</ButtonTitle>
       <DescriptionWrapper>
         <Description>{description}</Description>
@@ -29,7 +27,6 @@ const Container = styled.div`
   flex-direction: row;
   max-width: 100vw;
   height: 14.9rem;
-
   border-bottom-width: 1px;
   border-bottom-color: ${(props) => props.theme.colors.onSurface};
   border-bottom-style: solid;
@@ -43,10 +40,8 @@ const ButtonTitle = styled.div`
   font-size: ${(props) => props.theme.fontSize.headline1};
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 700;
-
   white-space: nowrap;
   overflow: hidden;
-
   width: 50%;
   height: 100%;
 `;
