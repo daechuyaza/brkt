@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import { Tab } from '@common/ui';
+import { Tab, SortTab } from '@common/ui';
 
 type Props = {
   children: React.ReactNode;
@@ -81,7 +81,7 @@ export function ArticlesLayout({ children }: Props) {
           </a>
         </Link>
       </Tabbar>
-
+      <SortTab title={'Today'} />
       {children}
     </Container>
   );
