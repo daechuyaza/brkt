@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
 
+import { Avatar } from '@common/ui';
 import { ArticleType } from '@modules/article/types/article';
 
 type Props = {
@@ -28,9 +29,7 @@ export function MainArticle({ article, onClick }: Props) {
       <DescriptionWrapper>
         <Title>{article.title}</Title>
         <SubDescrptionBox>
-          <AvatarWrapper>
-            <Avatar src={article.authorThumbnail} layout={'fill'} priority={true} />
-          </AvatarWrapper>
+          <Avatar size={3.2} imageSrc={article.authorThumbnail} />
           <Author>{article.author}</Author>
           <ArticleDate>{article.updatedAt}</ArticleDate>
         </SubDescrptionBox>
@@ -55,18 +54,6 @@ const ThumbnailWrapper = styled.div`
 
 const Thumbnail = styled(Image)`
   object-fit: cover;
-`;
-
-const AvatarWrapper = styled.div`
-  position: relative;
-  width: 3.2rem;
-  height: 3.2rem;
-  border-radius: 25px;
-`;
-
-const Avatar = styled(Image)`
-  object-fit: cover;
-  border-radius: 2.5rem;
 `;
 
 const DescriptionWrapper = styled.div`
@@ -104,13 +91,11 @@ const Title = styled.div`
 const Author = styled.div`
   font-size: ${(props) => props.theme.fontSize.subtitle2};
   font-family: 'Noto Sans KR', sans-serif;
-  /* font-weight: 400; */
   color: ${(props) => props.theme.colors.secondary};
 `;
 
 const ArticleDate = styled.div`
   font-size: ${(props) => props.theme.fontSize.subtitle2};
   font-family: 'Noto Sans KR', sans-serif;
-  /* font-weight: 400; */
   color: ${(props) => props.theme.colors.secondary};
 `;
