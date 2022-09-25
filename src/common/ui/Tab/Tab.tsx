@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 type Props = {
   title: 'Trending' | 'Following' | 'Series';
   isTapped: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 type TabTitleProps = Pick<Props, 'isTapped'>;

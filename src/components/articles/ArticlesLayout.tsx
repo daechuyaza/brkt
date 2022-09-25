@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Tab } from '@common/ui';
 
@@ -11,56 +11,77 @@ type Props = {
 
 export function ArticlesLayout({ children }: Props) {
   const router = useRouter();
-  const [tappedButton, setTappedButton] = useState<'Trending' | 'Following' | 'Series'>('Trending');
+  const [tappedButton, setTappedButton] = useState<'Trending' | 'Following' | 'Series'>(() => {
+    if (router.pathname === '/articles/trending') {
+      return 'Trending';
+    }
 
-  const getTitleByPathName = (pathname: string) => {
-    switch (pathname) {
+    if (router.pathname === '/articles/following') {
+      return 'Following';
+    }
+
+    if (router.pathname === '/articles/series') {
+      return 'Series';
+    }
+
+    return 'Trending';
+  });
+  const [titleName, setTitleName] = useState<'최신 컨텐츠' | '팔로잉' | '시리즈'>(() => {
+    if (router.pathname === '/articles/trending') {
+      return '최신 컨텐츠';
+    }
+
+    if (router.pathname === '/articles/following') {
+      return '팔로잉';
+    }
+
+    if (router.pathname === '/articles/series') {
+      return '시리즈';
+    }
+
+    return '최신 컨텐츠';
+  });
+
+  useEffect(() => {
+    switch (router.pathname) {
       case '/articles/trending':
-        return '최신 컨텐츠';
+        setTappedButton('Trending');
+        setTitleName('최신 컨텐츠');
+        return;
 
       case '/articles/following':
-        return '팔로잉';
+        setTappedButton('Following');
+        setTitleName('팔로잉');
+        return;
 
       case '/articles/series':
-        return '시리즈';
+        setTappedButton('Series');
+        setTitleName('시리즈');
+        return;
     }
-  };
+  }, [router.pathname]);
 
   return (
     <Container>
-      <Title>{getTitleByPathName(router.pathname)}</Title>
+      <Title>{titleName}</Title>
       <Tabbar>
         <Link href="/articles/trending" passHref>
-          <Tab
-            title={'Trending'}
-            isTapped={tappedButton === 'Trending'}
-            onClick={() => {
-              //route
-              setTappedButton('Trending');
-            }}
-          />
+          <a>
+            <Tab title={'Trending'} isTapped={tappedButton === 'Trending'} />
+          </a>
         </Link>
         <Link href="/articles/following" passHref>
-          <Tab
-            title={'Following'}
-            isTapped={tappedButton === 'Following'}
-            onClick={() => {
-              //route
-              setTappedButton('Following');
-            }}
-          />
+          <a>
+            <Tab title={'Following'} isTapped={tappedButton === 'Following'} />
+          </a>
         </Link>
         <Link href="/articles/series" passHref>
-          <Tab
-            title={'Series'}
-            isTapped={tappedButton === 'Series'}
-            onClick={() => {
-              //route
-              setTappedButton('Series');
-            }}
-          />
+          <a>
+            <Tab title={'Series'} isTapped={tappedButton === 'Series'} />
+          </a>
         </Link>
       </Tabbar>
+
       {children}
     </Container>
   );
