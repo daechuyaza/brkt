@@ -90,7 +90,6 @@ export function ArticlesLayout({ children }: Props) {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 70rem;
   padding-top: ${(props) => props.theme.spacing[9]};
   padding-right: ${(props) => props.theme.spacing[10]};
   padding-left: ${(props) => props.theme.spacing[10]};

@@ -29,7 +29,7 @@ export function MainArticle({ article, onClick }: Props) {
       <DescriptionWrapper>
         <Title>{article.title}</Title>
         <SubDescrptionBox>
-          <Avatar size={3.2} imageSrc={article.authorThumbnail} />
+          <Avatar size={2.8} imageSrc={article.authorThumbnail} />
           <Author>{article.author}</Author>
           <ArticleDate>{article.updatedAt}</ArticleDate>
         </SubDescrptionBox>
